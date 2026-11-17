@@ -27,16 +27,16 @@
    "status": 200,
    "cors": true,
    "kind": "json",
-   "ms": 353,
-   "at": 1794833053,
+   "ms": 472,
+   "at": 1794921878,
    "consecutiveFailures": 0,
    "bytes": 2191
   },
   "lastCrawl": {
-   "at": 1794833053,
+   "at": 1794921878,
    "ok": true,
-   "count": 126198,
-   "fresh": 107295,
+   "count": 126355,
+   "fresh": 109847,
    "error": null,
    "errors": 1
   }
@@ -62,16 +62,16 @@
    "status": 200,
    "cors": true,
    "kind": "json",
-   "ms": 268,
-   "at": 1794833053,
+   "ms": 263,
+   "at": 1794921878,
    "consecutiveFailures": 0,
    "bytes": 1522
   },
   "lastCrawl": {
-   "at": 1794833053,
+   "at": 1794921878,
    "ok": true,
-   "count": 12511,
-   "fresh": 11893,
+   "count": 12524,
+   "fresh": 11992,
    "error": null,
    "errors": 0
   }
@@ -105,9 +105,9 @@
    "status": 403,
    "cors": false,
    "kind": "challenge",
-   "ms": 150,
-   "at": 1794833053,
-   "consecutiveFailures": 97,
+   "ms": 185,
+   "at": 1794921878,
+   "consecutiveFailures": 98,
    "error": "http"
   }
  },
@@ -132,13 +132,13 @@
    "status": 200,
    "cors": true,
    "kind": "json",
-   "ms": 551,
-   "at": 1794833053,
+   "ms": 663,
+   "at": 1794921878,
    "consecutiveFailures": 0,
    "bytes": 9956468
   },
   "lastCrawl": {
-   "at": 1794833053,
+   "at": 1794921878,
    "ok": true,
    "count": 723,
    "fresh": 723,
@@ -169,13 +169,13 @@
    "status": 200,
    "cors": true,
    "kind": "other",
-   "ms": 549,
-   "at": 1794833053,
+   "ms": 393,
+   "at": 1794921878,
    "consecutiveFailures": 0,
    "bytes": 2053305
   },
   "lastCrawl": {
-   "at": 1794833053,
+   "at": 1794921878,
    "ok": true,
    "count": 926,
    "fresh": 926,
@@ -207,13 +207,13 @@
    "status": 200,
    "cors": true,
    "kind": "json",
-   "ms": 221,
-   "at": 1794833053,
+   "ms": 279,
+   "at": 1794921878,
    "consecutiveFailures": 0,
    "bytes": 652
   },
   "lastCrawl": {
-   "at": 1794833053,
+   "at": 1794921878,
    "ok": true,
    "count": 608,
    "fresh": 608,
@@ -243,18 +243,18 @@
    "status": 200,
    "cors": true,
    "kind": "json",
-   "ms": 366,
-   "at": 1794833053,
+   "ms": 368,
+   "at": 1794921878,
    "consecutiveFailures": 0,
    "bytes": 5639
   },
   "lastCrawl": {
-   "at": 1794833053,
+   "at": 1794921878,
    "ok": true,
    "count": 1116,
    "fresh": 532,
    "error": null,
-   "errors": 55
+   "errors": 57
   }
  },
  {
@@ -287,16 +287,16 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 622,
-   "at": 1794833053,
+   "ms": 293,
+   "at": 1794921878,
    "consecutiveFailures": 0,
-   "bytes": 95930
+   "bytes": 96749
   },
   "lastCrawl": {
-   "at": 1794833053,
+   "at": 1794921878,
    "ok": true,
-   "count": 4258,
-   "fresh": 4139,
+   "count": 4270,
+   "fresh": 4148,
    "error": null,
    "errors": 0
   }
@@ -325,16 +325,16 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 1041,
-   "at": 1794833053,
+   "ms": 857,
+   "at": 1794921878,
    "consecutiveFailures": 0,
    "bytes": 1133
   },
   "lastCrawl": {
-   "at": 1794833053,
+   "at": 1794921878,
    "ok": true,
-   "count": 828,
-   "fresh": 826,
+   "count": 834,
+   "fresh": 831,
    "error": null,
    "errors": 0
   }
@@ -355,9 +355,9 @@
    "status": 0,
    "cors": false,
    "kind": "error",
-   "ms": 82,
-   "at": 1794833053,
-   "consecutiveFailures": 97,
+   "ms": 141,
+   "at": 1794921878,
+   "consecutiveFailures": 98,
    "error": "robots"
   }
  },
@@ -377,9 +377,9 @@
    "status": 403,
    "cors": false,
    "kind": "challenge",
-   "ms": 844,
-   "at": 1794833053,
-   "consecutiveFailures": 97,
+   "ms": 553,
+   "at": 1794921878,
+   "consecutiveFailures": 98,
    "error": "http"
   }
  },
@@ -399,8 +399,8 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 284,
-   "at": 1794833053,
+   "ms": 590,
+   "at": 1794921878,
    "consecutiveFailures": 0,
    "bytes": 19332
   }
@@ -430,16 +430,16 @@
    "status": 403,
    "cors": false,
    "kind": "challenge",
-   "ms": 235,
-   "at": 1794833053,
-   "consecutiveFailures": 67,
+   "ms": 228,
+   "at": 1794921878,
+   "consecutiveFailures": 68,
    "error": "http"
   },
   "lastCrawl": {
-   "at": 1794833053,
+   "at": 1794921878,
    "ok": true,
-   "count": 8619,
-   "fresh": 8527,
+   "count": 8627,
+   "fresh": 8526,
    "error": null,
    "errors": 0
   }
@@ -461,10 +461,10 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 599,
-   "at": 1794833053,
+   "ms": 850,
+   "at": 1794921878,
    "consecutiveFailures": 0,
-   "bytes": 2097169
+   "bytes": 2098778
   }
  },
  {
@@ -483,8 +483,8 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 1129,
-   "at": 1794833053,
+   "ms": 1143,
+   "at": 1794921878,
    "consecutiveFailures": 0,
    "bytes": 28332
   }
@@ -505,8 +505,8 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 2205,
-   "at": 1794833053,
+   "ms": 1025,
+   "at": 1794921878,
    "consecutiveFailures": 0,
    "bytes": 3365
   }
@@ -527,9 +527,9 @@
    "status": 403,
    "cors": false,
    "kind": "challenge",
-   "ms": 740,
-   "at": 1794833053,
-   "consecutiveFailures": 67,
+   "ms": 719,
+   "at": 1794921878,
+   "consecutiveFailures": 68,
    "error": "http"
   }
  },
@@ -557,16 +557,16 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 803,
-   "at": 1794833053,
+   "ms": 725,
+   "at": 1794921878,
    "consecutiveFailures": 0,
    "bytes": 356377
   },
   "lastCrawl": {
-   "at": 1794833053,
+   "at": 1794921878,
    "ok": true,
-   "count": 6213,
-   "fresh": 5986,
+   "count": 6231,
+   "fresh": 6004,
    "error": null,
    "errors": 0
   }
@@ -587,8 +587,8 @@
    "status": 200,
    "cors": true,
    "kind": "html",
-   "ms": 229,
-   "at": 1794833053,
+   "ms": 303,
+   "at": 1794921878,
    "consecutiveFailures": 0,
    "bytes": 3232
   }
@@ -609,8 +609,8 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 199,
-   "at": 1794833053,
+   "ms": 378,
+   "at": 1794921878,
    "consecutiveFailures": 0,
    "bytes": 24444
   }
@@ -631,8 +631,8 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 273,
-   "at": 1794833053,
+   "ms": 304,
+   "at": 1794921878,
    "consecutiveFailures": 0,
    "bytes": 1568
   }
@@ -653,8 +653,8 @@
    "status": 200,
    "cors": true,
    "kind": "html",
-   "ms": 300,
-   "at": 1794833053,
+   "ms": 315,
+   "at": 1794921878,
    "consecutiveFailures": 0,
    "bytes": 11487
   }
@@ -676,9 +676,9 @@
    "status": 403,
    "cors": false,
    "kind": "challenge",
-   "ms": 205,
-   "at": 1794833053,
-   "consecutiveFailures": 97,
+   "ms": 225,
+   "at": 1794921878,
+   "consecutiveFailures": 98,
    "error": "http"
   }
  },
@@ -698,8 +698,8 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 1155,
-   "at": 1794833053,
+   "ms": 1247,
+   "at": 1794921878,
    "consecutiveFailures": 0,
    "bytes": 68935
   }
@@ -720,8 +720,8 @@
    "status": 200,
    "cors": true,
    "kind": "html",
-   "ms": 114,
-   "at": 1794833053,
+   "ms": 236,
+   "at": 1794921878,
    "consecutiveFailures": 0,
    "bytes": 36639
   }
@@ -743,8 +743,8 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 227,
-   "at": 1794833053,
+   "ms": 389,
+   "at": 1794921878,
    "consecutiveFailures": 0,
    "bytes": 24140
   }
@@ -765,8 +765,8 @@
    "status": 200,
    "cors": true,
    "kind": "html",
-   "ms": 251,
-   "at": 1794833053,
+   "ms": 368,
+   "at": 1794921878,
    "consecutiveFailures": 0,
    "bytes": 100166
   }
@@ -787,8 +787,8 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 416,
-   "at": 1794833053,
+   "ms": 568,
+   "at": 1794921878,
    "consecutiveFailures": 0,
    "bytes": 20207
   }
@@ -809,8 +809,8 @@
    "status": 200,
    "cors": true,
    "kind": "html",
-   "ms": 264,
-   "at": 1794833053,
+   "ms": 462,
+   "at": 1794921878,
    "consecutiveFailures": 0,
    "bytes": 149650
   }
@@ -831,10 +831,10 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 1646,
-   "at": 1794833053,
+   "ms": 1871,
+   "at": 1794921878,
    "consecutiveFailures": 0,
-   "bytes": 337315
+   "bytes": 336428
   }
  },
  {
@@ -853,10 +853,10 @@
    "status": 200,
    "cors": true,
    "kind": "html",
-   "ms": 511,
-   "at": 1794833053,
+   "ms": 713,
+   "at": 1794921878,
    "consecutiveFailures": 0,
-   "bytes": 1828107
+   "bytes": 1831244
   }
  },
  {
@@ -875,8 +875,8 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 1214,
-   "at": 1794833053,
+   "ms": 1171,
+   "at": 1794921878,
    "consecutiveFailures": 0,
    "bytes": 158948
   }
@@ -905,13 +905,13 @@
    "status": 200,
    "cors": true,
    "kind": "html",
-   "ms": 182,
-   "at": 1794833053,
+   "ms": 297,
+   "at": 1794921878,
    "consecutiveFailures": 0,
    "bytes": 16955
   },
   "lastCrawl": {
-   "at": 1794833053,
+   "at": 1794921878,
    "ok": true,
    "count": 133,
    "fresh": 133,
@@ -936,9 +936,9 @@
    "status": 0,
    "cors": false,
    "kind": "error",
-   "ms": 130,
-   "at": 1794833053,
-   "consecutiveFailures": 97,
+   "ms": 165,
+   "at": 1794921878,
+   "consecutiveFailures": 98,
    "error": "robots"
   }
  },
@@ -961,9 +961,9 @@
    "status": 403,
    "cors": false,
    "kind": "challenge",
-   "ms": 72,
-   "at": 1794833053,
-   "consecutiveFailures": 97,
+   "ms": 220,
+   "at": 1794921878,
+   "consecutiveFailures": 98,
    "error": "http"
   }
  },
@@ -984,8 +984,8 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 296,
-   "at": 1794833053,
+   "ms": 265,
+   "at": 1794921878,
    "consecutiveFailures": 0,
    "bytes": 91180
   }
@@ -1003,7 +1003,7 @@
   "note": "partnership ask",
   "sweep": {
    "kind": "skipped",
-   "at": 1794833053
+   "at": 1794921878
   }
  },
  {
@@ -1023,9 +1023,9 @@
    "status": 404,
    "cors": false,
    "kind": "error",
-   "ms": 338,
-   "at": 1794833053,
-   "consecutiveFailures": 97,
+   "ms": 349,
+   "at": 1794921878,
+   "consecutiveFailures": 98,
    "error": "http"
   }
  },
@@ -1045,8 +1045,8 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 1007,
-   "at": 1794833053,
+   "ms": 572,
+   "at": 1794921878,
    "consecutiveFailures": 0,
    "bytes": 50701
   }
@@ -1069,8 +1069,8 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 584,
-   "at": 1794833053,
+   "ms": 581,
+   "at": 1794921878,
    "consecutiveFailures": 0,
    "bytes": 10412
   }
@@ -1089,7 +1089,7 @@
   "evidence": "2026-10-15: the host does not resolve",
   "sweep": {
    "kind": "skipped",
-   "at": 1794833053
+   "at": 1794921878
   }
  }
 ]
