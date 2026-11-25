@@ -1,1095 +1,1115 @@
 [
- {
-  "id": "chub",
-  "label": "Chub.ai",
-  "kinds": [
-   "character"
-  ],
-  "status": "live",
-  "adapter": "chub.json",
-  "hosts": [
-   "chub.ai",
-   "charhub.ai",
-   "characterhub.org",
-   "venus.chub.ai",
-   "gateway.chub.ai",
-   "avatars.charhub.io"
-  ],
-  "probe": "https://api.chub.ai/search?namespace=characters&first=1",
-  "evidence": "shipped generators",
-  "terms": {
-   "url": "https://chub.ai/tos",
-   "read": "2026-10-15",
-   "verdict": "silent",
-   "note": "no clause on crawling; public cards are licensed for personal, non-commercial use with credit to Chub"
+  {
+    "id": "chub",
+    "label": "Chub.ai",
+    "kinds": [
+      "character"
+    ],
+    "status": "live",
+    "adapter": "chub.json",
+    "hosts": [
+      "chub.ai",
+      "charhub.ai",
+      "characterhub.org",
+      "venus.chub.ai",
+      "gateway.chub.ai",
+      "avatars.charhub.io"
+    ],
+    "probe": "https://api.chub.ai/search?namespace=characters&first=1",
+    "evidence": "shipped generators",
+    "terms": {
+      "url": "https://chub.ai/tos",
+      "read": "2026-10-15",
+      "verdict": "silent",
+      "note": "no clause on crawling; public cards are licensed for personal, non-commercial use with credit to Chub"
+    },
+    "sweep": {
+      "status": 200,
+      "cors": true,
+      "kind": "json",
+      "ms": 303,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 2191
+    },
+    "lastCrawl": {
+      "at": 1794314316,
+      "ok": true,
+      "count": 126177,
+      "fresh": 103666,
+      "error": null,
+      "errors": 2
+    }
   },
-  "sweep": {
-   "status": 200,
-   "cors": true,
-   "kind": "json",
-   "ms": 1832,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 1569
+  {
+    "id": "chub-lorebooks",
+    "label": "Chub.ai Lorebooks",
+    "kinds": [
+      "lorebook"
+    ],
+    "status": "live",
+    "adapter": "chub-lorebooks.json",
+    "hosts": [],
+    "probe": "https://api.chub.ai/search?namespace=lorebooks&first=1",
+    "evidence": "Blizzard A.6b",
+    "terms": {
+      "url": "https://chub.ai/tos",
+      "read": "2026-10-15",
+      "verdict": "silent",
+      "note": "as chub"
+    },
+    "sweep": {
+      "status": 200,
+      "cors": true,
+      "kind": "json",
+      "ms": 217,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 1522
+    },
+    "lastCrawl": {
+      "at": 1794314316,
+      "ok": true,
+      "count": 12529,
+      "fresh": 11992,
+      "error": null,
+      "errors": 0
+    }
   },
-  "lastCrawl": {
-   "at": 1795531926,
-   "ok": true,
-   "count": 126992,
-   "fresh": 80519,
-   "error": null,
-   "errors": 2
-  }
- },
- {
-  "id": "chub-lorebooks",
-  "label": "Chub.ai Lorebooks",
-  "kinds": [
-   "lorebook"
-  ],
-  "status": "live",
-  "adapter": "chub-lorebooks.json",
-  "hosts": [],
-  "probe": "https://api.chub.ai/search?namespace=lorebooks&first=1",
-  "evidence": "Blizzard A.6b",
-  "terms": {
-   "url": "https://chub.ai/tos",
-   "read": "2026-10-15",
-   "verdict": "silent",
-   "note": "as chub"
+  {
+    "id": "fictionlab",
+    "label": "FictionLab",
+    "kinds": [
+      "scenario"
+    ],
+    "status": "live",
+    "adapter": "fictionlab.json",
+    "hosts": [
+      "fictionlab.ai"
+    ],
+    "probe": "https://fictionlab.ai/api/search?version=2&keyw=&size=1&searchType=scenarios&sortType=trending&time=all_time&page=0&mature=false",
+    "evidence": "2026-10-20: its live search runs in the plugin again; its terms forbid automated data gathering and Cash decided to keep it (terms.override)",
+    "crawl": false,
+    "terms": {
+      "url": "https://fictionlab.ai/terms-of-service",
+      "read": "2026-10-15",
+      "verdict": "forbids",
+      "note": "\"you will not engage in or use any data mining, robots, scraping or similar automated data gathering or extraction methods\"",
+      "override": {
+        "by": "Cash",
+        "date": "2026-10-20",
+        "said": "keep going no asking for permissions just do it"
+      }
+    },
+    "sweep": {
+      "status": 403,
+      "cors": false,
+      "kind": "challenge",
+      "ms": 207,
+      "at": 1794314316,
+      "consecutiveFailures": 91,
+      "error": "http"
+    }
   },
-  "sweep": {
-   "status": 200,
-   "cors": true,
-   "kind": "json",
-   "ms": 128,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 1522
+  {
+    "id": "perchance-rp",
+    "label": "Perchance RP scenarios",
+    "kinds": [
+      "scenario"
+    ],
+    "status": "live",
+    "adapter": "perchance-rp.mjs",
+    "hosts": [],
+    "probe": "https://user.uploads.dev/file/4bae8c63c1b8a8f0485e27e30737dc44.json",
+    "evidence": "measured 2026-09-01: 10,019,449 bytes, CORS *",
+    "terms": {
+      "url": null,
+      "read": "2026-10-15",
+      "verdict": "none",
+      "note": "perchance.org/terms is a reserved name, not terms; the file is a public upload the ai-rpg generator reads; user.uploads.dev has no robots.txt"
+    },
+    "sweep": {
+      "status": 200,
+      "cors": true,
+      "kind": "json",
+      "ms": 703,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 9956468
+    },
+    "lastCrawl": {
+      "at": 1794314316,
+      "ok": true,
+      "count": 723,
+      "fresh": 723,
+      "error": null,
+      "errors": 0
+    }
   },
-  "lastCrawl": {
-   "at": 1795531926,
-   "ok": true,
-   "count": 12551,
-   "fresh": 11935,
-   "error": null,
-   "errors": 0
-  }
- },
- {
-  "id": "fictionlab",
-  "label": "FictionLab",
-  "kinds": [
-   "scenario"
-  ],
-  "status": "live",
-  "adapter": "fictionlab.json",
-  "hosts": [
-   "fictionlab.ai"
-  ],
-  "probe": "https://fictionlab.ai/api/search?version=2&keyw=&size=1&searchType=scenarios&sortType=trending&time=all_time&page=0&mature=false",
-  "evidence": "2026-10-20: its live search runs in the plugin again; its terms forbid automated data gathering and Cash decided to keep it (terms.override)",
-  "crawl": false,
-  "terms": {
-   "url": "https://fictionlab.ai/terms-of-service",
-   "read": "2026-10-15",
-   "verdict": "forbids",
-   "note": "\"you will not engage in or use any data mining, robots, scraping or similar automated data gathering or extraction methods\"",
-   "override": {
-    "by": "Cash",
-    "date": "2026-10-20",
-    "said": "keep going no asking for permissions just do it"
-   }
+  {
+    "id": "perchance-db",
+    "label": "Perchance Character Database",
+    "kinds": [
+      "character"
+    ],
+    "status": "live",
+    "adapter": "perchance-db.mjs",
+    "hosts": [
+      "nosfertm.github.io"
+    ],
+    "probe": "https://raw.githubusercontent.com/nosfertm/perchance-character-database/main/ai-character-chat/characters/index.json",
+    "evidence": "read 2026-10-04: 934 characters; creative works CC BY-SA 4.0 (TERMS_AND_CONDITIONS.md); the author is credited and the folder linked",
+    "terms": {
+      "url": "https://github.com/nosfertm/perchance-character-database",
+      "read": "2026-10-15",
+      "verdict": "allows",
+      "note": "creative works CC BY-SA 4.0 (TERMS_AND_CONDITIONS.md); every record credits its author and links its folder"
+    },
+    "sweep": {
+      "status": 200,
+      "cors": true,
+      "kind": "other",
+      "ms": 183,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 2053305
+    },
+    "lastCrawl": {
+      "at": 1794314316,
+      "ok": true,
+      "count": 926,
+      "fresh": 926,
+      "error": null,
+      "errors": 0
+    }
   },
-  "sweep": {
-   "status": 403,
-   "cors": false,
-   "kind": "challenge",
-   "ms": 182,
-   "at": 1795531926,
-   "consecutiveFailures": 105,
-   "error": "http"
-  }
- },
- {
-  "id": "perchance-rp",
-  "label": "Perchance RP scenarios",
-  "kinds": [
-   "scenario"
-  ],
-  "status": "live",
-  "adapter": "perchance-rp.mjs",
-  "hosts": [],
-  "probe": "https://user.uploads.dev/file/4bae8c63c1b8a8f0485e27e30737dc44.json",
-  "evidence": "measured 2026-09-01: 10,019,449 bytes, CORS *",
-  "terms": {
-   "url": null,
-   "read": "2026-10-15",
-   "verdict": "none",
-   "note": "perchance.org/terms is a reserved name, not terms; the file is a public upload the ai-rpg generator reads; user.uploads.dev has no robots.txt"
+  {
+    "id": "huggingface",
+    "label": "HuggingFace datasets",
+    "kinds": [
+      "character",
+      "lorebook"
+    ],
+    "status": "live",
+    "adapter": "huggingface.mjs",
+    "hosts": [
+      "huggingface.co"
+    ],
+    "probe": "https://huggingface.co/api/datasets?search=character%20card&limit=1",
+    "evidence": "open API",
+    "terms": {
+      "url": "https://huggingface.co/terms-of-service",
+      "read": "2026-10-15",
+      "verdict": "silent",
+      "note": "an open API; each dataset carries its own licence"
+    },
+    "sweep": {
+      "status": 200,
+      "cors": true,
+      "kind": "json",
+      "ms": 107,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 652
+    },
+    "lastCrawl": {
+      "at": 1794314316,
+      "ok": true,
+      "count": 608,
+      "fresh": 608,
+      "error": null,
+      "errors": 2
+    }
   },
-  "sweep": {
-   "status": 200,
-   "cors": true,
-   "kind": "json",
-   "ms": 546,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 9956468
+  {
+    "id": "github",
+    "label": "GitHub card repos",
+    "kinds": [
+      "character",
+      "lorebook"
+    ],
+    "status": "live",
+    "adapter": "github-topics.mjs",
+    "hosts": [],
+    "probe": "https://api.github.com/search/repositories?q=topic:character-cards&per_page=1",
+    "evidence": "open API",
+    "terms": {
+      "url": "https://docs.github.com/en/site-policy/github-terms/github-terms-of-service",
+      "read": "2026-10-15",
+      "verdict": "silent",
+      "note": "the public REST API within its rate limits; each repository carries its own licence"
+    },
+    "sweep": {
+      "status": 200,
+      "cors": true,
+      "kind": "json",
+      "ms": 511,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 5639
+    },
+    "lastCrawl": {
+      "at": 1794314316,
+      "ok": true,
+      "count": 1329,
+      "fresh": 537,
+      "error": null,
+      "errors": 59
+    }
   },
-  "lastCrawl": {
-   "at": 1795531926,
-   "ok": true,
-   "count": 723,
-   "fresh": 723,
-   "error": null,
-   "errors": 0
-  }
- },
- {
-  "id": "perchance-db",
-  "label": "Perchance Character Database",
-  "kinds": [
-   "character"
-  ],
-  "status": "live",
-  "adapter": "perchance-db.mjs",
-  "hosts": [
-   "nosfertm.github.io"
-  ],
-  "probe": "https://raw.githubusercontent.com/nosfertm/perchance-character-database/main/ai-character-chat/characters/index.json",
-  "evidence": "read 2026-10-04: 934 characters; creative works CC BY-SA 4.0 (TERMS_AND_CONDITIONS.md); the author is credited and the folder linked",
-  "terms": {
-   "url": "https://github.com/nosfertm/perchance-character-database",
-   "read": "2026-10-15",
-   "verdict": "allows",
-   "note": "creative works CC BY-SA 4.0 (TERMS_AND_CONDITIONS.md); every record credits its author and links its folder"
+  {
+    "id": "character-tavern",
+    "label": "Character Tavern",
+    "kinds": [
+      "character"
+    ],
+    "status": "live",
+    "hosts": [
+      "character-tavern.com",
+      "cards.character-tavern.com",
+      "ct-cards.storage.character-tavern.com"
+    ],
+    "probe": "https://character-tavern.com/",
+    "evidence": "2026-10-20: read through its sitemap (robots.txt allows it; it lists ~4,200 characters with dates and covers) and each card's __data.json, newest first within a nightly budget; its terms forbid automated access and Cash decided to read it anyway (terms.override). The /api/ it used to read stays off: robots.txt disallows it",
+    "adapter": "character-tavern.mjs",
+    "terms": {
+      "url": "https://character-tavern.com/legal/tos",
+      "read": "2026-10-15",
+      "verdict": "forbids",
+      "note": "\u00a74 Technical Ground Rules: \"No bots.\" \"Automated access is prohibited\"; \u00a75 lists \"Automate access without permission\". robots.txt also disallows /api/, which the crawler read",
+      "override": {
+        "by": "Cash",
+        "date": "2026-10-20",
+        "said": "keep going no asking for permissions just do it"
+      }
+    },
+    "sweep": {
+      "status": 200,
+      "cors": false,
+      "kind": "html",
+      "ms": 114,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 96437
+    },
+    "lastCrawl": {
+      "at": 1794314316,
+      "ok": true,
+      "count": 4198,
+      "fresh": 4094,
+      "error": null,
+      "errors": 0
+    }
   },
-  "sweep": {
-   "status": 200,
-   "cors": true,
-   "kind": "other",
-   "ms": 355,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 2053305
+  {
+    "id": "aicharactercards",
+    "label": "AI Character Cards",
+    "kinds": [
+      "character"
+    ],
+    "status": "live",
+    "hosts": [
+      "aicharactercards.com",
+      "api.aicharactercards.com"
+    ],
+    "probe": "https://api.aicharactercards.com/",
+    "evidence": "open JSON listing at api.aicharactercards.com/api/cards, ~560 cards; /uploads/ is CORS-open (2026-09-02)",
+    "adapter": "aicharactercards.mjs",
+    "terms": {
+      "url": "https://aicharactercards.com/terms",
+      "read": "2026-10-15",
+      "verdict": "silent",
+      "note": "no clause on crawling; downloads capped at 10 a minute per user, and the crawler never uses /download"
+    },
+    "sweep": {
+      "status": 200,
+      "cors": false,
+      "kind": "html",
+      "ms": 587,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 1133
+    },
+    "lastCrawl": {
+      "at": 1794314316,
+      "ok": true,
+      "count": 784,
+      "fresh": 782,
+      "error": null,
+      "errors": 0
+    }
   },
-  "lastCrawl": {
-   "at": 1795531926,
-   "ok": true,
-   "count": 926,
-   "fresh": 926,
-   "error": null,
-   "errors": 0
-  }
- },
- {
-  "id": "huggingface",
-  "label": "HuggingFace datasets",
-  "kinds": [
-   "character",
-   "lorebook"
-  ],
-  "status": "live",
-  "adapter": "huggingface.mjs",
-  "hosts": [
-   "huggingface.co"
-  ],
-  "probe": "https://huggingface.co/api/datasets?search=character%20card&limit=1",
-  "evidence": "open API",
-  "terms": {
-   "url": "https://huggingface.co/terms-of-service",
-   "read": "2026-10-15",
-   "verdict": "silent",
-   "note": "an open API; each dataset carries its own licence"
+  {
+    "id": "jannyai",
+    "label": "JannyAI",
+    "kinds": [
+      "character"
+    ],
+    "status": "blocked",
+    "hosts": [
+      "jannyai.com"
+    ],
+    "probe": "https://jannyai.com/",
+    "evidence": "2026-10-15: a Cloudflare challenge on every page, robots.txt included (never bypassed)",
+    "sweep": {
+      "status": 0,
+      "cors": false,
+      "kind": "error",
+      "ms": 68,
+      "at": 1794314316,
+      "consecutiveFailures": 91,
+      "error": "robots"
+    }
   },
-  "sweep": {
-   "status": 200,
-   "cors": true,
-   "kind": "json",
-   "ms": 282,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 652
+  {
+    "id": "crushon",
+    "label": "CrushOn",
+    "kinds": [
+      "character"
+    ],
+    "status": "candidate",
+    "hosts": [
+      "crushon.ai"
+    ],
+    "probe": "https://crushon.ai/",
+    "evidence": "shipped generators; 2026-10-15: a closed platform, no card export seen; terms not read (its terms page answers 403 to fetchers)",
+    "sweep": {
+      "status": 403,
+      "cors": false,
+      "kind": "challenge",
+      "ms": 334,
+      "at": 1794314316,
+      "consecutiveFailures": 91,
+      "error": "http"
+    }
   },
-  "lastCrawl": {
-   "at": 1795531926,
-   "ok": true,
-   "count": 608,
-   "fresh": 608,
-   "error": null,
-   "errors": 2
-  }
- },
- {
-  "id": "github",
-  "label": "GitHub card repos",
-  "kinds": [
-   "character",
-   "lorebook"
-  ],
-  "status": "live",
-  "adapter": "github-topics.mjs",
-  "hosts": [],
-  "probe": "https://api.github.com/search/repositories?q=topic:character-cards&per_page=1",
-  "evidence": "open API",
-  "terms": {
-   "url": "https://docs.github.com/en/site-policy/github-terms/github-terms-of-service",
-   "read": "2026-10-15",
-   "verdict": "silent",
-   "note": "the public REST API within its rate limits; each repository carries its own licence"
+  {
+    "id": "backyard",
+    "label": "Backyard AI Hub",
+    "kinds": [
+      "character"
+    ],
+    "status": "blocked",
+    "hosts": [
+      "backyard.ai"
+    ],
+    "probe": "https://backyard.ai/hub",
+    "evidence": "/hub redirects to sign-in (2026-09-02)",
+    "sweep": {
+      "status": 200,
+      "cors": false,
+      "kind": "html",
+      "ms": 364,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 35872
+    }
   },
-  "sweep": {
-   "status": 200,
-   "cors": true,
-   "kind": "json",
-   "ms": 318,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 5639
+  {
+    "id": "risu-realm",
+    "label": "Risu AI Realm",
+    "kinds": [
+      "character"
+    ],
+    "status": "live",
+    "hosts": [
+      "realm.risuai.net",
+      "risuai.net",
+      "sv.risuai.xyz"
+    ],
+    "probe": "https://realm.risuai.net/",
+    "evidence": "list endpoint from the open-source client (sv.risuai.xyz/realm/\u2026), 30 cards a page across four sorts; downloads are PNG or charx, CORS * (2026-09-02)",
+    "adapter": "risu-realm.mjs",
+    "terms": {
+      "url": null,
+      "read": "2026-10-15",
+      "verdict": "none",
+      "note": "no terms page; robots.txt sets no rules; RisuAI is open source"
+    },
+    "sweep": {
+      "status": 403,
+      "cors": false,
+      "kind": "challenge",
+      "ms": 143,
+      "at": 1794314316,
+      "consecutiveFailures": 61,
+      "error": "http"
+    },
+    "lastCrawl": {
+      "at": 1794314316,
+      "ok": true,
+      "count": 8572,
+      "fresh": 8494,
+      "error": null,
+      "errors": 0
+    }
   },
-  "lastCrawl": {
-   "at": 1795531926,
-   "ok": true,
-   "count": 1096,
-   "fresh": 515,
-   "error": null,
-   "errors": 60
-  }
- },
- {
-  "id": "character-tavern",
-  "label": "Character Tavern",
-  "kinds": [
-   "character"
-  ],
-  "status": "live",
-  "hosts": [
-   "character-tavern.com",
-   "cards.character-tavern.com",
-   "ct-cards.storage.character-tavern.com"
-  ],
-  "probe": "https://character-tavern.com/",
-  "evidence": "2026-10-20: read through its sitemap (robots.txt allows it; it lists ~4,200 characters with dates and covers) and each card's __data.json, newest first within a nightly budget; its terms forbid automated access and Cash decided to read it anyway (terms.override). The /api/ it used to read stays off: robots.txt disallows it",
-  "adapter": "character-tavern.mjs",
-  "terms": {
-   "url": "https://character-tavern.com/legal/tos",
-   "read": "2026-10-15",
-   "verdict": "forbids",
-   "note": "§4 Technical Ground Rules: \"No bots.\" \"Automated access is prohibited\"; §5 lists \"Automate access without permission\". robots.txt also disallows /api/, which the crawler read",
-   "override": {
-    "by": "Cash",
-    "date": "2026-10-20",
-    "said": "keep going no asking for permissions just do it"
-   }
+  {
+    "id": "wyvern",
+    "label": "Wyvern Chat",
+    "kinds": [
+      "character"
+    ],
+    "status": "blocked",
+    "hosts": [
+      "app.wyvern.chat",
+      "wyvern.chat"
+    ],
+    "probe": "https://app.wyvern.chat/",
+    "evidence": "api.wyvern.chat answers 401 (2026-09-02)",
+    "sweep": {
+      "status": 200,
+      "cors": false,
+      "kind": "html",
+      "ms": 969,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 2096079
+    }
   },
-  "sweep": {
-   "status": 200,
-   "cors": false,
-   "kind": "html",
-   "ms": 415,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 98462
+  {
+    "id": "soulweaver",
+    "label": "Soulweaver AI",
+    "kinds": [
+      "character"
+    ],
+    "status": "candidate",
+    "hosts": [
+      "soulweaverai.com"
+    ],
+    "probe": "https://soulweaverai.com/",
+    "evidence": "curated list; 2026-10-15: a closed platform, no card export seen; terms not read",
+    "sweep": {
+      "status": 200,
+      "cors": false,
+      "kind": "html",
+      "ms": 811,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 28332
+    }
   },
-  "lastCrawl": {
-   "at": 1795531926,
-   "ok": true,
-   "count": 4318,
-   "fresh": 4169,
-   "error": null,
-   "errors": 0
-  }
- },
- {
-  "id": "aicharactercards",
-  "label": "AI Character Cards",
-  "kinds": [
-   "character"
-  ],
-  "status": "live",
-  "hosts": [
-   "aicharactercards.com",
-   "api.aicharactercards.com"
-  ],
-  "probe": "https://api.aicharactercards.com/",
-  "evidence": "open JSON listing at api.aicharactercards.com/api/cards, ~560 cards; /uploads/ is CORS-open (2026-09-02)",
-  "adapter": "aicharactercards.mjs",
-  "terms": {
-   "url": "https://aicharactercards.com/terms",
-   "read": "2026-10-15",
-   "verdict": "silent",
-   "note": "no clause on crawling; downloads capped at 10 a minute per user, and the crawler never uses /download"
+  {
+    "id": "nyai",
+    "label": "NYAI",
+    "kinds": [
+      "character"
+    ],
+    "status": "candidate",
+    "hosts": [
+      "nyai.me"
+    ],
+    "probe": "https://nyai.me/ai/bots",
+    "evidence": "curated list; 2026-10-15: a closed platform, no card export seen; terms not read",
+    "sweep": {
+      "status": 200,
+      "cors": false,
+      "kind": "html",
+      "ms": 772,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 3365
+    }
   },
-  "sweep": {
-   "status": 200,
-   "cors": false,
-   "kind": "html",
-   "ms": 1044,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 1133
+  {
+    "id": "datacat",
+    "label": "DataCat",
+    "kinds": [
+      "character"
+    ],
+    "status": "blocked",
+    "hosts": [
+      "datacat.run"
+    ],
+    "probe": "https://datacat.run/",
+    "evidence": "2026-10-15: robots.txt disallows /api/, where its data is; its cards are copies of a site that walls them",
+    "sweep": {
+      "status": 403,
+      "cors": false,
+      "kind": "challenge",
+      "ms": 62,
+      "at": 1794314316,
+      "consecutiveFailures": 61,
+      "error": "http"
+    }
   },
-  "lastCrawl": {
-   "at": 1795531926,
-   "ok": true,
-   "count": 884,
-   "fresh": 881,
-   "error": null,
-   "errors": 0
-  }
- },
- {
-  "id": "jannyai",
-  "label": "JannyAI",
-  "kinds": [
-   "character"
-  ],
-  "status": "blocked",
-  "hosts": [
-   "jannyai.com"
-  ],
-  "probe": "https://jannyai.com/",
-  "evidence": "2026-10-15: a Cloudflare challenge on every page, robots.txt included (never bypassed)",
-  "sweep": {
-   "status": 0,
-   "cors": false,
-   "kind": "error",
-   "ms": 97,
-   "at": 1795531926,
-   "consecutiveFailures": 105,
-   "error": "robots"
-  }
- },
- {
-  "id": "crushon",
-  "label": "CrushOn",
-  "kinds": [
-   "character"
-  ],
-  "status": "candidate",
-  "hosts": [
-   "crushon.ai"
-  ],
-  "probe": "https://crushon.ai/",
-  "evidence": "shipped generators; 2026-10-15: a closed platform, no card export seen; terms not read (its terms page answers 403 to fetchers)",
-  "sweep": {
-   "status": 403,
-   "cors": false,
-   "kind": "challenge",
-   "ms": 319,
-   "at": 1795531926,
-   "consecutiveFailures": 105,
-   "error": "http"
-  }
- },
- {
-  "id": "backyard",
-  "label": "Backyard AI Hub",
-  "kinds": [
-   "character"
-  ],
-  "status": "blocked",
-  "hosts": [
-   "backyard.ai"
-  ],
-  "probe": "https://backyard.ai/hub",
-  "evidence": "/hub redirects to sign-in (2026-09-02)",
-  "sweep": {
-   "status": 200,
-   "cors": false,
-   "kind": "html",
-   "ms": 438,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 1989
-  }
- },
- {
-  "id": "risu-realm",
-  "label": "Risu AI Realm",
-  "kinds": [
-   "character"
-  ],
-  "status": "live",
-  "hosts": [
-   "realm.risuai.net",
-   "risuai.net",
-   "sv.risuai.xyz"
-  ],
-  "probe": "https://realm.risuai.net/",
-  "evidence": "list endpoint from the open-source client (sv.risuai.xyz/realm/…), 30 cards a page across four sorts; downloads are PNG or charx, CORS * (2026-09-02)",
-  "adapter": "risu-realm.mjs",
-  "terms": {
-   "url": null,
-   "read": "2026-10-15",
-   "verdict": "none",
-   "note": "no terms page; robots.txt sets no rules; RisuAI is open source"
+  {
+    "id": "botbooru",
+    "label": "Bot Booru",
+    "kinds": [
+      "character",
+      "lorebook"
+    ],
+    "status": "live",
+    "hosts": [
+      "botbooru.com"
+    ],
+    "probe": "https://botbooru.com/",
+    "evidence": "gallery JSON from /js/ui.js: /posts/?page&per_page=24, /post/{id} with all card fields, /api/lorebooks; no CORS (super-fetch); ~3,300 visible posts, ~140 lorebooks (2026-09-02)",
+    "adapter": "botbooru.mjs",
+    "terms": {
+      "url": "https://botbooru.com/tos",
+      "read": "2026-10-15",
+      "verdict": "silent",
+      "note": "no clause on crawling; robots.txt disallows /api/, /post/, /character/, /images/, so the crawler reads only /posts/"
+    },
+    "sweep": {
+      "status": 200,
+      "cors": false,
+      "kind": "html",
+      "ms": 582,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 356377
+    },
+    "lastCrawl": {
+      "at": 1794314316,
+      "ok": true,
+      "count": 6183,
+      "fresh": 5953,
+      "error": null,
+      "errors": 0
+    }
   },
-  "sweep": {
-   "status": 403,
-   "cors": false,
-   "kind": "challenge",
-   "ms": 235,
-   "at": 1795531926,
-   "consecutiveFailures": 75,
-   "error": "http"
+  {
+    "id": "char-archive",
+    "label": "Char Archive",
+    "kinds": [
+      "character"
+    ],
+    "status": "dead",
+    "hosts": [
+      "char-archive.evulid.cc"
+    ],
+    "probe": "https://char-archive.evulid.cc/",
+    "evidence": "site says Shutdown (2026-09-02)",
+    "sweep": {
+      "status": 200,
+      "cors": true,
+      "kind": "html",
+      "ms": 234,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 3232
+    }
   },
-  "lastCrawl": {
-   "at": 1795531926,
-   "ok": true,
-   "count": 8662,
-   "fresh": 8571,
-   "error": null,
-   "errors": 0
-  }
- },
- {
-  "id": "wyvern",
-  "label": "Wyvern Chat",
-  "kinds": [
-   "character"
-  ],
-  "status": "blocked",
-  "hosts": [
-   "app.wyvern.chat",
-   "wyvern.chat"
-  ],
-  "probe": "https://app.wyvern.chat/",
-  "evidence": "api.wyvern.chat answers 401 (2026-09-02)",
-  "sweep": {
-   "status": 200,
-   "cors": false,
-   "kind": "html",
-   "ms": 422,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 2105600
-  }
- },
- {
-  "id": "soulweaver",
-  "label": "Soulweaver AI",
-  "kinds": [
-   "character"
-  ],
-  "status": "candidate",
-  "hosts": [
-   "soulweaverai.com"
-  ],
-  "probe": "https://soulweaverai.com/",
-  "evidence": "curated list; 2026-10-15: a closed platform, no card export seen; terms not read",
-  "sweep": {
-   "status": 200,
-   "cors": false,
-   "kind": "html",
-   "ms": 1225,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 28332
-  }
- },
- {
-  "id": "nyai",
-  "label": "NYAI",
-  "kinds": [
-   "character"
-  ],
-  "status": "candidate",
-  "hosts": [
-   "nyai.me"
-  ],
-  "probe": "https://nyai.me/ai/bots",
-  "evidence": "curated list; 2026-10-15: a closed platform, no card export seen; terms not read",
-  "sweep": {
-   "status": 200,
-   "cors": false,
-   "kind": "html",
-   "ms": 1108,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 3365
-  }
- },
- {
-  "id": "datacat",
-  "label": "DataCat",
-  "kinds": [
-   "character"
-  ],
-  "status": "blocked",
-  "hosts": [
-   "datacat.run"
-  ],
-  "probe": "https://datacat.run/",
-  "evidence": "2026-10-15: robots.txt disallows /api/, where its data is; its cards are copies of a site that walls them",
-  "sweep": {
-   "status": 403,
-   "cors": false,
-   "kind": "challenge",
-   "ms": 917,
-   "at": 1795531926,
-   "consecutiveFailures": 75,
-   "error": "http"
-  }
- },
- {
-  "id": "botbooru",
-  "label": "Bot Booru",
-  "kinds": [
-   "character",
-   "lorebook"
-  ],
-  "status": "live",
-  "hosts": [
-   "botbooru.com"
-  ],
-  "probe": "https://botbooru.com/",
-  "evidence": "gallery JSON from /js/ui.js: /posts/?page&per_page=24, /post/{id} with all card fields, /api/lorebooks; no CORS (super-fetch); ~3,300 visible posts, ~140 lorebooks (2026-09-02)",
-  "adapter": "botbooru.mjs",
-  "terms": {
-   "url": "https://botbooru.com/tos",
-   "read": "2026-10-15",
-   "verdict": "silent",
-   "note": "no clause on crawling; robots.txt disallows /api/, /post/, /character/, /images/, so the crawler reads only /posts/"
+  {
+    "id": "chatbots-neocities",
+    "label": "Chatbots Neocities",
+    "kinds": [
+      "character"
+    ],
+    "status": "dead",
+    "hosts": [
+      "chatbots.neocities.org"
+    ],
+    "probe": "https://chatbots.neocities.org/",
+    "evidence": "a webring of sites, not a card library (2026-09-02)",
+    "sweep": {
+      "status": 200,
+      "cors": false,
+      "kind": "html",
+      "ms": 187,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 24444
+    }
   },
-  "sweep": {
-   "status": 200,
-   "cors": false,
-   "kind": "html",
-   "ms": 823,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 356377
+  {
+    "id": "agnai",
+    "label": "Agnai",
+    "kinds": [
+      "character"
+    ],
+    "status": "candidate",
+    "hosts": [
+      "agnai.chat"
+    ],
+    "probe": "https://agnai.chat/",
+    "evidence": "named, unverified; 2026-10-15: a closed platform, no card export seen; terms not read",
+    "sweep": {
+      "status": 200,
+      "cors": false,
+      "kind": "html",
+      "ms": 235,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 1568
+    }
   },
-  "lastCrawl": {
-   "at": 1795531926,
-   "ok": true,
-   "count": 6075,
-   "fresh": 6046,
-   "error": null,
-   "errors": 0
-  }
- },
- {
-  "id": "char-archive",
-  "label": "Char Archive",
-  "kinds": [
-   "character"
-  ],
-  "status": "dead",
-  "hosts": [
-   "char-archive.evulid.cc"
-  ],
-  "probe": "https://char-archive.evulid.cc/",
-  "evidence": "site says Shutdown (2026-09-02)",
-  "sweep": {
-   "status": 200,
-   "cors": true,
-   "kind": "html",
-   "ms": 275,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 3232
-  }
- },
- {
-  "id": "chatbots-neocities",
-  "label": "Chatbots Neocities",
-  "kinds": [
-   "character"
-  ],
-  "status": "dead",
-  "hosts": [
-   "chatbots.neocities.org"
-  ],
-  "probe": "https://chatbots.neocities.org/",
-  "evidence": "a webring of sites, not a card library (2026-09-02)",
-  "sweep": {
-   "status": 200,
-   "cors": false,
-   "kind": "html",
-   "ms": 527,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 24444
-  }
- },
- {
-  "id": "agnai",
-  "label": "Agnai",
-  "kinds": [
-   "character"
-  ],
-  "status": "candidate",
-  "hosts": [
-   "agnai.chat"
-  ],
-  "probe": "https://agnai.chat/",
-  "evidence": "named, unverified; 2026-10-15: a closed platform, no card export seen; terms not read",
-  "sweep": {
-   "status": 200,
-   "cors": false,
-   "kind": "html",
-   "ms": 302,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 1568
-  }
- },
- {
-  "id": "spicychat",
-  "label": "SpicyChat",
-  "kinds": [
-   "character"
-  ],
-  "status": "blocked",
-  "hosts": [
-   "spicychat.ai"
-  ],
-  "probe": "https://spicychat.ai/",
-  "evidence": "prod.nd-api.com needs a bearer token (2026-09-02)",
-  "sweep": {
-   "status": 200,
-   "cors": true,
-   "kind": "html",
-   "ms": 298,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 11973
-  }
- },
- {
-  "id": "moescape",
-  "label": "Yodayo / Moescape",
-  "kinds": [
-   "character"
-  ],
-  "status": "blocked",
-  "hosts": [
-   "moescape.ai",
-   "yodayo.com"
-  ],
-  "probe": "https://moescape.ai/",
-  "evidence": "2026-10-15: a Cloudflare challenge on every page (never bypassed)",
-  "sweep": {
-   "status": 403,
-   "cors": false,
-   "kind": "challenge",
-   "ms": 205,
-   "at": 1795531926,
-   "consecutiveFailures": 105,
-   "error": "http"
-  }
- },
- {
-  "id": "minitavern",
-  "label": "MiniTavern market",
-  "kinds": [
-   "character"
-  ],
-  "status": "dead",
-  "hosts": [
-   "mini-tavern.com"
-  ],
-  "probe": "https://mini-tavern.com/",
-  "evidence": "2026-10-15: its sitemap has five pages and no public card listing",
-  "sweep": {
-   "status": 200,
-   "cors": false,
-   "kind": "html",
-   "ms": 1193,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 68935
-  }
- },
- {
-  "id": "sillycard",
-  "label": "Sillycard",
-  "kinds": [
-   "character"
-  ],
-  "status": "dead",
-  "hosts": [
-   "sillycard-web.pages.dev"
-  ],
-  "probe": "https://sillycard-web.pages.dev/",
-  "evidence": "a viewer app, not a library (2026-09-02)",
-  "sweep": {
-   "status": 200,
-   "cors": true,
-   "kind": "html",
-   "ms": 211,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 12169
-  }
- },
- {
-  "id": "aidungeon",
-  "label": "AI Dungeon",
-  "kinds": [
-   "scenario"
-  ],
-  "status": "blocked",
-  "hosts": [
-   "aidungeon.com",
-   "play.aidungeon.com"
-  ],
-  "probe": "https://play.aidungeon.com/",
-  "evidence": "2026-10-15: about 70,000 public scenarios in 14 sitemaps, but its terms (help.aidungeon.com/terms-of-service) forbid any robot, spider or crawler that scrapes or accesses the Services to collect information",
-  "sweep": {
-   "status": 200,
-   "cors": false,
-   "kind": "html",
-   "ms": 218,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 24299
-  }
- },
- {
-  "id": "aiga",
-  "label": "aiga_ Shared Worlds",
-  "kinds": [
-   "scenario"
-  ],
-  "status": "candidate",
-  "hosts": [
-   "aiga.io"
-  ],
-  "probe": "https://www.aiga.io/",
-  "evidence": "named; 2026-10-15: a closed platform, no card export seen; terms not read",
-  "sweep": {
-   "status": 200,
-   "cors": true,
-   "kind": "html",
-   "ms": 298,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 100166
-  }
- },
- {
-  "id": "rpggo",
-  "label": "RPGGO",
-  "kinds": [
-   "scenario"
-  ],
-  "status": "candidate",
-  "hosts": [
-   "rpggo.ai"
-  ],
-  "probe": "https://rpggo.ai/",
-  "evidence": "named; 2026-10-15: a closed platform, no card export seen; terms not read",
-  "sweep": {
-   "status": 200,
-   "cors": false,
-   "kind": "html",
-   "ms": 444,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 20207
-  }
- },
- {
-  "id": "altworld",
-  "label": "Altworld",
-  "kinds": [
-   "scenario"
-  ],
-  "status": "blocked",
-  "hosts": [
-   "altworld.io"
-  ],
-  "probe": "https://altworld.io/",
-  "evidence": "2026-10-15: its terms forbid attempts to scrape the service",
-  "sweep": {
-   "status": 200,
-   "cors": true,
-   "kind": "html",
-   "ms": 261,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 149650
-  }
- },
- {
-  "id": "talefy",
-  "label": "Talefy",
-  "kinds": [
-   "scenario"
-  ],
-  "status": "candidate",
-  "hosts": [
-   "talefy.ai"
-  ],
-  "probe": "https://talefy.ai/",
-  "evidence": "named; 2026-10-15: a closed platform, no card export seen; terms not read",
-  "sweep": {
-   "status": 200,
-   "cors": false,
-   "kind": "html",
-   "ms": 1611,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 336772
-  }
- },
- {
-  "id": "kobold",
-  "label": "KoboldAI",
-  "kinds": [
-   "scenario"
-  ],
-  "status": "dead",
-  "hosts": [
-   "koboldai.net"
-  ],
-  "probe": "https://koboldai.net/",
-  "evidence": "2026-10-15: KoboldAI Lite ships 41 built-in scenarios, several of them blank templates; too few to be a source",
-  "sweep": {
-   "status": 200,
-   "cors": true,
-   "kind": "html",
-   "ms": 611,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 1850926
-  }
- },
- {
-  "id": "novelai",
-  "label": "NovelAI scenarios",
-  "kinds": [
-   "scenario"
-  ],
-  "status": "candidate",
-  "hosts": [
-   "novelai.net"
-  ],
-  "probe": "https://novelai.net/",
-  "evidence": "named; 2026-10-15: a closed platform, no card export seen; terms not read",
-  "sweep": {
-   "status": 200,
-   "cors": false,
-   "kind": "html",
-   "ms": 133,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 158943
-  }
- },
- {
-  "id": "bronya-rand",
-  "label": "Bronya Rand's Character Bot Archive",
-  "kinds": [
-   "lorebook",
-   "character"
-  ],
-  "status": "live",
-  "hosts": [
-   "bronya-rand.github.io"
-  ],
-  "probe": "https://bronya-rand.github.io/reimagined-couscous/world-lore-books",
-  "evidence": "static GitHub Pages archive: 84 bot pages with V2 JSON+PNG, world-info JSON books; CORS * (2026-09-02)",
-  "adapter": "bronya-rand.mjs",
-  "terms": {
-   "url": null,
-   "read": "2026-10-15",
-   "verdict": "none",
-   "note": "a GitHub Pages archive with no licence or terms of its own"
+  {
+    "id": "spicychat",
+    "label": "SpicyChat",
+    "kinds": [
+      "character"
+    ],
+    "status": "blocked",
+    "hosts": [
+      "spicychat.ai"
+    ],
+    "probe": "https://spicychat.ai/",
+    "evidence": "prod.nd-api.com needs a bearer token (2026-09-02)",
+    "sweep": {
+      "status": 200,
+      "cors": true,
+      "kind": "html",
+      "ms": 297,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 11457
+    }
   },
-  "sweep": {
-   "status": 200,
-   "cors": true,
-   "kind": "html",
-   "ms": 346,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 16955
+  {
+    "id": "moescape",
+    "label": "Yodayo / Moescape",
+    "kinds": [
+      "character"
+    ],
+    "status": "blocked",
+    "hosts": [
+      "moescape.ai",
+      "yodayo.com"
+    ],
+    "probe": "https://moescape.ai/",
+    "evidence": "2026-10-15: a Cloudflare challenge on every page (never bypassed)",
+    "sweep": {
+      "status": 403,
+      "cors": false,
+      "kind": "challenge",
+      "ms": 217,
+      "at": 1794314316,
+      "consecutiveFailures": 91,
+      "error": "http"
+    }
   },
-  "lastCrawl": {
-   "at": 1795531926,
-   "ok": true,
-   "count": 133,
-   "fresh": 133,
-   "error": null,
-   "errors": 0
+  {
+    "id": "minitavern",
+    "label": "MiniTavern market",
+    "kinds": [
+      "character"
+    ],
+    "status": "dead",
+    "hosts": [
+      "mini-tavern.com"
+    ],
+    "probe": "https://mini-tavern.com/",
+    "evidence": "2026-10-15: its sitemap has five pages and no public card listing",
+    "sweep": {
+      "status": 200,
+      "cors": false,
+      "kind": "html",
+      "ms": 1531,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 68935
+    }
+  },
+  {
+    "id": "sillycard",
+    "label": "Sillycard",
+    "kinds": [
+      "character"
+    ],
+    "status": "dead",
+    "hosts": [
+      "sillycard-web.pages.dev"
+    ],
+    "probe": "https://sillycard-web.pages.dev/",
+    "evidence": "a viewer app, not a library (2026-09-02)",
+    "sweep": {
+      "status": 200,
+      "cors": true,
+      "kind": "html",
+      "ms": 195,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 36639
+    }
+  },
+  {
+    "id": "aidungeon",
+    "label": "AI Dungeon",
+    "kinds": [
+      "scenario"
+    ],
+    "status": "blocked",
+    "hosts": [
+      "aidungeon.com",
+      "play.aidungeon.com"
+    ],
+    "probe": "https://play.aidungeon.com/",
+    "evidence": "2026-10-15: about 70,000 public scenarios in 14 sitemaps, but its terms (help.aidungeon.com/terms-of-service) forbid any robot, spider or crawler that scrapes or accesses the Services to collect information",
+    "sweep": {
+      "status": 200,
+      "cors": false,
+      "kind": "html",
+      "ms": 181,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 23984
+    }
+  },
+  {
+    "id": "aiga",
+    "label": "aiga_ Shared Worlds",
+    "kinds": [
+      "scenario"
+    ],
+    "status": "candidate",
+    "hosts": [
+      "aiga.io"
+    ],
+    "probe": "https://www.aiga.io/",
+    "evidence": "named; 2026-10-15: a closed platform, no card export seen; terms not read",
+    "sweep": {
+      "status": 200,
+      "cors": true,
+      "kind": "html",
+      "ms": 277,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 104071
+    }
+  },
+  {
+    "id": "rpggo",
+    "label": "RPGGO",
+    "kinds": [
+      "scenario"
+    ],
+    "status": "candidate",
+    "hosts": [
+      "rpggo.ai"
+    ],
+    "probe": "https://rpggo.ai/",
+    "evidence": "named; 2026-10-15: a closed platform, no card export seen; terms not read",
+    "sweep": {
+      "status": 200,
+      "cors": false,
+      "kind": "html",
+      "ms": 366,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 20207
+    }
+  },
+  {
+    "id": "altworld",
+    "label": "Altworld",
+    "kinds": [
+      "scenario"
+    ],
+    "status": "blocked",
+    "hosts": [
+      "altworld.io"
+    ],
+    "probe": "https://altworld.io/",
+    "evidence": "2026-10-15: its terms forbid attempts to scrape the service",
+    "sweep": {
+      "status": 200,
+      "cors": true,
+      "kind": "html",
+      "ms": 220,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 149650
+    }
+  },
+  {
+    "id": "talefy",
+    "label": "Talefy",
+    "kinds": [
+      "scenario"
+    ],
+    "status": "candidate",
+    "hosts": [
+      "talefy.ai"
+    ],
+    "probe": "https://talefy.ai/",
+    "evidence": "named; 2026-10-15: a closed platform, no card export seen; terms not read",
+    "sweep": {
+      "status": 200,
+      "cors": false,
+      "kind": "html",
+      "ms": 1178,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 334728
+    }
+  },
+  {
+    "id": "kobold",
+    "label": "KoboldAI",
+    "kinds": [
+      "scenario"
+    ],
+    "status": "dead",
+    "hosts": [
+      "koboldai.net"
+    ],
+    "probe": "https://koboldai.net/",
+    "evidence": "2026-10-15: KoboldAI Lite ships 41 built-in scenarios, several of them blank templates; too few to be a source",
+    "sweep": {
+      "status": 200,
+      "cors": true,
+      "kind": "html",
+      "ms": 501,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 1816709
+    }
+  },
+  {
+    "id": "novelai",
+    "label": "NovelAI scenarios",
+    "kinds": [
+      "scenario"
+    ],
+    "status": "candidate",
+    "hosts": [
+      "novelai.net"
+    ],
+    "probe": "https://novelai.net/",
+    "evidence": "named; 2026-10-15: a closed platform, no card export seen; terms not read",
+    "sweep": {
+      "status": 200,
+      "cors": false,
+      "kind": "html",
+      "ms": 862,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 158945
+    }
+  },
+  {
+    "id": "bronya-rand",
+    "label": "Bronya Rand's Character Bot Archive",
+    "kinds": [
+      "lorebook",
+      "character"
+    ],
+    "status": "live",
+    "hosts": [
+      "bronya-rand.github.io"
+    ],
+    "probe": "https://bronya-rand.github.io/reimagined-couscous/world-lore-books",
+    "evidence": "static GitHub Pages archive: 84 bot pages with V2 JSON+PNG, world-info JSON books; CORS * (2026-09-02)",
+    "adapter": "bronya-rand.mjs",
+    "terms": {
+      "url": null,
+      "read": "2026-10-15",
+      "verdict": "none",
+      "note": "a GitHub Pages archive with no licence or terms of its own"
+    },
+    "sweep": {
+      "status": 200,
+      "cors": true,
+      "kind": "html",
+      "ms": 88,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 16955
+    },
+    "lastCrawl": {
+      "at": 1794314316,
+      "ok": true,
+      "count": 133,
+      "fresh": 133,
+      "error": null,
+      "errors": 0
+    }
+  },
+  {
+    "id": "janitorai",
+    "label": "JanitorAI",
+    "kinds": [
+      "character"
+    ],
+    "status": "blocked",
+    "hosts": [
+      "janitorai.com"
+    ],
+    "probe": "https://janitorai.com/",
+    "evidence": "Cloudflare 403 from browser (2026-08-21)",
+    "note": "index + open only",
+    "sweep": {
+      "status": 0,
+      "cors": false,
+      "kind": "error",
+      "ms": 58,
+      "at": 1794314316,
+      "consecutiveFailures": 91,
+      "error": "robots"
+    }
+  },
+  {
+    "id": "characterai",
+    "label": "Character.AI",
+    "kinds": [
+      "character"
+    ],
+    "status": "blocked",
+    "hosts": [
+      "character.ai",
+      "characterai.io",
+      "c.ai"
+    ],
+    "probe": "https://character.ai/",
+    "evidence": "no public API",
+    "note": "open only",
+    "sweep": {
+      "status": 403,
+      "cors": false,
+      "kind": "challenge",
+      "ms": 147,
+      "at": 1794314316,
+      "consecutiveFailures": 91,
+      "error": "http"
+    }
+  },
+  {
+    "id": "voxta",
+    "label": "Voxta",
+    "kinds": [
+      "character"
+    ],
+    "status": "blocked",
+    "hosts": [
+      "voxta.ai"
+    ],
+    "probe": "https://voxta.ai/",
+    "evidence": "custom format",
+    "note": "open only",
+    "sweep": {
+      "status": 200,
+      "cors": false,
+      "kind": "html",
+      "ms": 260,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 91180
+    }
+  },
+  {
+    "id": "fur-ai",
+    "label": "FurAI",
+    "kinds": [
+      "character"
+    ],
+    "status": "candidate",
+    "hosts": [],
+    "probe": null,
+    "evidence": "G2G friendly per source header",
+    "note": "partnership ask",
+    "sweep": {
+      "kind": "skipped",
+      "at": 1794314316
+    }
+  },
+  {
+    "id": "nd-api",
+    "label": "nd-api (unidentified)",
+    "kinds": [
+      "character"
+    ],
+    "status": "candidate",
+    "hosts": [
+      "prod.nd-api.com",
+      "cdn.nd-api.com"
+    ],
+    "probe": "https://prod.nd-api.com/",
+    "evidence": "hit by several shipped generators; identify",
+    "sweep": {
+      "status": 404,
+      "cors": false,
+      "kind": "error",
+      "ms": 247,
+      "at": 1794314316,
+      "consecutiveFailures": 91,
+      "error": "http"
+    }
+  },
+  {
+    "id": "pygmalion",
+    "label": "Pygmalion",
+    "kinds": [
+      "character"
+    ],
+    "status": "blocked",
+    "hosts": [
+      "pygmalion.chat"
+    ],
+    "probe": "https://pygmalion.chat/",
+    "evidence": "2026-10-15: its terms (pygmalion.chat/terms-of-service) forbid any automated use of the system and systematic retrieval without written permission",
+    "sweep": {
+      "status": 200,
+      "cors": false,
+      "kind": "html",
+      "ms": 369,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 50407
+    }
+  },
+  {
+    "id": "lorebary",
+    "label": "LoreBary",
+    "kinds": [
+      "lorebook",
+      "character",
+      "scenario"
+    ],
+    "status": "blocked",
+    "hosts": [
+      "lorebary.com"
+    ],
+    "probe": "https://lorebary.com/",
+    "evidence": "2026-10-15: 1,888 lorebooks, 725 characters and 318 scenarios in its sitemap, but the pages are a script shell and the content comes only from /api, which robots.txt disallows",
+    "sweep": {
+      "status": 200,
+      "cors": false,
+      "kind": "html",
+      "ms": 456,
+      "at": 1794314316,
+      "consecutiveFailures": 0,
+      "bytes": 10342
+    }
+  },
+  {
+    "id": "aetherroom",
+    "label": "AetherRoom",
+    "kinds": [
+      "scenario"
+    ],
+    "status": "dead",
+    "hosts": [
+      "aetherroom.club"
+    ],
+    "probe": null,
+    "evidence": "2026-10-15: the host does not resolve",
+    "sweep": {
+      "kind": "skipped",
+      "at": 1794314316
+    }
+  },
+  {
+    "id": "blizzard",
+    "label": "BlizzardUI Templates",
+    "kinds": [
+      "scenario"
+    ],
+    "status": "live",
+    "adapter": "static",
+    "hosts": [
+      "perchance.org"
+    ],
+    "terms": "first-party",
+    "lastCrawl": {
+      "ts": 1795568175,
+      "added": 14,
+      "unchanged": 0,
+      "removed": 0,
+      "errors": 0
+    }
   }
- },
- {
-  "id": "janitorai",
-  "label": "JanitorAI",
-  "kinds": [
-   "character"
-  ],
-  "status": "blocked",
-  "hosts": [
-   "janitorai.com"
-  ],
-  "probe": "https://janitorai.com/",
-  "evidence": "Cloudflare 403 from browser (2026-08-21)",
-  "note": "index + open only",
-  "sweep": {
-   "status": 0,
-   "cors": false,
-   "kind": "error",
-   "ms": 141,
-   "at": 1795531926,
-   "consecutiveFailures": 105,
-   "error": "robots"
-  }
- },
- {
-  "id": "characterai",
-  "label": "Character.AI",
-  "kinds": [
-   "character"
-  ],
-  "status": "blocked",
-  "hosts": [
-   "character.ai",
-   "characterai.io",
-   "c.ai"
-  ],
-  "probe": "https://character.ai/",
-  "evidence": "no public API",
-  "note": "open only",
-  "sweep": {
-   "status": 403,
-   "cors": false,
-   "kind": "challenge",
-   "ms": 124,
-   "at": 1795531926,
-   "consecutiveFailures": 105,
-   "error": "http"
-  }
- },
- {
-  "id": "voxta",
-  "label": "Voxta",
-  "kinds": [
-   "character"
-  ],
-  "status": "blocked",
-  "hosts": [
-   "voxta.ai"
-  ],
-  "probe": "https://voxta.ai/",
-  "evidence": "custom format",
-  "note": "open only",
-  "sweep": {
-   "status": 200,
-   "cors": false,
-   "kind": "html",
-   "ms": 246,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 91194
-  }
- },
- {
-  "id": "fur-ai",
-  "label": "FurAI",
-  "kinds": [
-   "character"
-  ],
-  "status": "candidate",
-  "hosts": [],
-  "probe": null,
-  "evidence": "G2G friendly per source header",
-  "note": "partnership ask",
-  "sweep": {
-   "kind": "skipped",
-   "at": 1795531926
-  }
- },
- {
-  "id": "nd-api",
-  "label": "nd-api (unidentified)",
-  "kinds": [
-   "character"
-  ],
-  "status": "candidate",
-  "hosts": [
-   "prod.nd-api.com",
-   "cdn.nd-api.com"
-  ],
-  "probe": "https://prod.nd-api.com/",
-  "evidence": "hit by several shipped generators; identify",
-  "sweep": {
-   "status": 404,
-   "cors": false,
-   "kind": "error",
-   "ms": 393,
-   "at": 1795531926,
-   "consecutiveFailures": 105,
-   "error": "http"
-  }
- },
- {
-  "id": "pygmalion",
-  "label": "Pygmalion",
-  "kinds": [
-   "character"
-  ],
-  "status": "blocked",
-  "hosts": [
-   "pygmalion.chat"
-  ],
-  "probe": "https://pygmalion.chat/",
-  "evidence": "2026-10-15: its terms (pygmalion.chat/terms-of-service) forbid any automated use of the system and systematic retrieval without written permission",
-  "sweep": {
-   "status": 200,
-   "cors": false,
-   "kind": "html",
-   "ms": 1485,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 50701
-  }
- },
- {
-  "id": "lorebary",
-  "label": "LoreBary",
-  "kinds": [
-   "lorebook",
-   "character",
-   "scenario"
-  ],
-  "status": "blocked",
-  "hosts": [
-   "lorebary.com"
-  ],
-  "probe": "https://lorebary.com/",
-  "evidence": "2026-10-15: 1,888 lorebooks, 725 characters and 318 scenarios in its sitemap, but the pages are a script shell and the content comes only from /api, which robots.txt disallows",
-  "sweep": {
-   "status": 200,
-   "cors": false,
-   "kind": "html",
-   "ms": 588,
-   "at": 1795531926,
-   "consecutiveFailures": 0,
-   "bytes": 10482
-  }
- },
- {
-  "id": "aetherroom",
-  "label": "AetherRoom",
-  "kinds": [
-   "scenario"
-  ],
-  "status": "dead",
-  "hosts": [
-   "aetherroom.club"
-  ],
-  "probe": null,
-  "evidence": "2026-10-15: the host does not resolve",
-  "sweep": {
-   "kind": "skipped",
-   "at": 1795531926
-  }
- }
 ]
