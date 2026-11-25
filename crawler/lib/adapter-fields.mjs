@@ -36,6 +36,19 @@ export function flattenCategoryTags(obj) {
   return out;
 }
 
+// Tag ids as display names, through a table the adapter pins ({"1": "Male"}). An id the table does not know is skipped,
+// never shown raw; a name the source already sends as text is not an id and is skipped too.
+export function tagIdsToNames(table, ids) {
+  const out = [];
+  for (const id of Array.isArray(ids) ? ids : []) {
+    if (typeof id !== "number" && typeof id !== "string") continue;
+    const k = String(id).trim();
+    const name = Object.prototype.hasOwnProperty.call(table, k) ? table[k] : undefined;
+    if (typeof name === "string" && name && !out.includes(name)) out.push(name);
+  }
+  return out;
+}
+
 // Does a raw value say adult? true, 1, and the words a source uses for it; an array counts when it holds one.
 const ADULT_WORDS = ["true", "nsfw", "explicit", "adult", "erotic"];
 export function valueSignalsNsfw(v) {
@@ -57,6 +70,7 @@ export function readRow(a, raw) {
   const s = a.search || {};
   let m = mapFields(s.map, raw);
   if (s.flattenCategories && m.t && typeof m.t === "object" && !Array.isArray(m.t)) m = { ...m, t: flattenCategoryTags(m.t) };
+  if (a.tagNames && typeof a.tagNames === "object" && Array.isArray(m.t)) m = { ...m, t: tagIdsToNames(a.tagNames, m.t) };
   for (const f of Array.isArray(s.stripHtml) ? s.stripHtml : []) if (typeof m[f] === "string") m = { ...m, [f]: stripHtmlToText(m[f]) };
   const tags = Array.isArray(m.t) ? m.t : typeof m.t === "string" ? m.t.split(",") : [];
   let nsfw = m.nsfw === true || m.nsfw === "true" || m.nsfw === 1 || isNsfwTags(tags) || valueSignalsNsfw(m.nsfw);

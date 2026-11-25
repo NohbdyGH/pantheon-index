@@ -1,0 +1,133 @@
+{
+ "id": "jannyai",
+ "label": "JannyAI",
+ "kinds": [
+  "character"
+ ],
+ "status": "live",
+ "transport": "plain",
+ "caps": {
+  "s": "live",
+  "i": false,
+  "o": true
+ },
+ "hosts": [
+  "search.jannyai.com",
+  "image.jannyai.com",
+  "jannyai.com"
+ ],
+ "imageBase": "https://image.jannyai.com/bot-avatars/",
+ "tagNames": {
+  "1": "Male",
+  "2": "Female",
+  "3": "Non-binary",
+  "4": "Celebrity",
+  "5": "OC",
+  "6": "Fictional",
+  "7": "Real",
+  "8": "Game",
+  "9": "Anime",
+  "10": "Historical",
+  "11": "Royalty",
+  "12": "Detective",
+  "13": "Hero",
+  "14": "Villain",
+  "15": "Magical",
+  "16": "Non-human",
+  "17": "Monster",
+  "18": "Monster Girl",
+  "19": "Alien",
+  "20": "Robot",
+  "21": "Politics",
+  "22": "Vampire",
+  "23": "Giant",
+  "24": "OpenAI",
+  "25": "Elf",
+  "26": "Multiple",
+  "27": "VTuber",
+  "28": "Dominant",
+  "29": "Submissive",
+  "30": "Scenario",
+  "31": "Pokemon",
+  "32": "Assistant",
+  "34": "Non-English",
+  "36": "Philosophy",
+  "38": "RPG",
+  "39": "Religion",
+  "41": "Books",
+  "42": "AnyPOV",
+  "43": "Angst",
+  "44": "Demi-Human",
+  "45": "Enemies to Lovers",
+  "46": "Smut",
+  "47": "MLM",
+  "48": "WLW",
+  "49": "Dead Dove",
+  "50": "Fluff",
+  "51": "Horror",
+  "52": "Comedy",
+  "53": "Furry",
+  "54": "FemPov",
+  "55": "MalePov",
+  "56": "Switch",
+  "57": "Trans",
+  "58": "Staff Pick",
+  "59": "The Beginning",
+  "60": "Sci-Fi",
+  "61": "Music Mania"
+ },
+ "search": {
+  "url": "https://search.jannyai.com/indexes/janny-characters/search",
+  "method": "POST",
+  "headers": {
+   "Authorization": "Bearer 88a6463b66e04fb07ba87ee3db06af337f492ce511d93df6e2d2968cb2ff2b30",
+   "Accept": "application/json"
+  },
+  "params": {},
+  "controls": [
+   "q",
+   "nsfw",
+   "sort",
+   "tokMin",
+   "tokMax"
+  ],
+  "sorts": {
+   "newest": "createdAtStamp:desc",
+   "top": "totalToken:desc"
+  },
+  "bodySortList": true,
+  "bodyFilter": {
+   "field": "filter",
+   "nsfwFalse": "isNsfw = false",
+   "tokenField": "totalToken"
+  },
+  "bodyFields": {
+   "q": "q",
+   "sort": "sort"
+  },
+  "nsfwFalseOnly": true,
+  "maxQuery": 200,
+  "paging": {
+   "mode": "offset",
+   "size": 24,
+   "start": 1
+  },
+  "stripHtml": [
+   "b"
+  ],
+  "items": "hits",
+  "map": {
+   "nid": "id",
+   "n": "name",
+   "b": "description",
+   "t": "tagIds",
+   "c": "avatar",
+   "nsfw": "isNsfw",
+   "tok": "totalToken",
+   "o": "https://jannyai.com/characters/{id~u}"
+  }
+ },
+ "origin": "https://jannyai.com/",
+ "probe": null,
+ "note": "Live search only, never crawled and never imported (browse and link back). The Authorization value is JannyAI's own front-end search key, the search-only key its site sends from a visitor's browser to its public search index (a search-scoped key, not an account credential), copied as published; it grants only what that site's own visitors get, and is sent only in this request header, never logged and never taken from a record or from input. Response shape: hits[] and estimatedTotalHits, as read from the design reference; not re-confirmed live because jannyai.com answers scripted requests with a Cloudflare challenge. The hit names no creator, so none is claimed. nsfw is sent only in Safe mode (filter isNsfw = false); an unmapped sort is left out. Tag ids map to display names through the pinned table; an id not in it is skipped."
+}

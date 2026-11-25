@@ -33,6 +33,16 @@ function checkLiveFields(a, s, errors) {
   }
   if (s.stripHtml !== undefined && !(Array.isArray(s.stripHtml) && s.stripHtml.every(f => ["n", "b"].includes(f)))) errors.push("search.stripHtml");
   for (const k of ["flattenCategories", "nsfwFalseOnly"]) if (s[k] !== undefined && typeof s[k] !== "boolean") errors.push("search." + k);
+  if (s.bodySortList !== undefined && typeof s.bodySortList !== "boolean") errors.push("search.bodySortList");
+  if (s.bodyFilter !== undefined) {
+    const f = s.bodyFilter; const ok = f && typeof f === "object" && !Array.isArray(f);
+    const clause = v => v === undefined || (typeof v === "string" && /^[A-Za-z][A-Za-z0-9_]{0,39}( (=|!=|>=|<=|>|<) (true|false|[0-9]{1,9}))?$/.test(v));
+    if (!ok || !(f.field === undefined || (typeof f.field === "string" && /^[a-z][A-Za-z]{0,19}$/.test(f.field))) || !clause(f.nsfwFalse) || !(f.tokenField === undefined || (typeof f.tokenField === "string" && /^[A-Za-z][A-Za-z0-9_]{0,39}$/.test(f.tokenField)))) errors.push("search.bodyFilter");
+  }
+  if (a.tagNames !== undefined) {
+    const n = a.tagNames; const ents = n && typeof n === "object" && !Array.isArray(n) ? Object.entries(n) : null;
+    if (!ents || ents.length > 200 || !ents.every(([k, v]) => /^\d{1,6}$/.test(k) && typeof v === "string" && v.length >= 1 && v.length <= 60)) errors.push("tagNames");
+  }
   if (s.nsfwIncludes !== undefined && (typeof s.nsfwIncludes !== "string" || !s.nsfwIncludes)) errors.push("search.nsfwIncludes");
   if (s.maxQuery !== undefined && !(Number.isInteger(s.maxQuery) && s.maxQuery >= 1 && s.maxQuery <= 200)) errors.push("search.maxQuery");
   if (hasHosts && a.hosts.length) {

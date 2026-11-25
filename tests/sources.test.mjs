@@ -57,3 +57,18 @@ test("charavault and nosfertm are built live-search-only sources, held blocked u
   assert.match(by("charavault-lorebooks").terms.note, /charavault-cards/);
   assert.match(by("nosfertm").terms.note, /MIT/); assert.match(by("nosfertm").terms.note, /CC BY-SA 4\.0/); assert.match(by("nosfertm").terms.note, /credit/);
 });
+
+// 2026-11-25: JannyAI is built and held; Wyvern's terms forbid automated access, so it is recorded and not built.
+test("jannyai is a built live-search-only source held blocked, and wyvern is blocked with no adapter because its terms forbid it", () => {
+  const by = id => sources.find(s => s.id === id);
+  assert.equal(sources.filter(s => s.id === "jannyai").length, 1); assert.equal(sources.filter(s => s.id === "wyvern").length, 1);
+  const j = by("jannyai");
+  assert.equal(j.status, "blocked"); assert.equal(j.crawl, false); assert.equal(j.probe, null); assert.match(j.evidence, /2026-11-25/); assert.match(j.evidence, /real visitor's page/);
+  assert.equal(j.terms.read, "2026-11-25"); assert.match(j.terms.url, /^https:\/\//);
+  const a = JSON.parse(fs.readFileSync("crawler/adapters/" + j.adapter, "utf8")); assert.equal(a.id, "jannyai"); assert.equal(a.caps.s, "live"); assert.equal(a.transport, "plain");
+  for (const h of a.hosts) assert.ok(j.hosts.includes(h), h + " is in the register");
+  const w = by("wyvern");
+  assert.equal(w.status, "blocked"); assert.equal(w.adapter, undefined, "no adapter is built for a site that forbids it"); assert.equal(w.probe, null); assert.equal(w.crawl, false);
+  assert.equal(w.terms.verdict, "forbids"); assert.match(w.terms.url, /^https:\/\//); assert.match(w.terms.note, /Automated Access is prohibited/);
+  assert.equal(fs.existsSync("crawler/adapters/wyvern.json"), false);
+});

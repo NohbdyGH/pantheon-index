@@ -1,0 +1,33 @@
+{
+ "hits": [
+  {
+   "id": "0a1b2c3d-1111-2222-3333-444455556666",
+   "name": "Captain Vale",
+   "description": "<p>A sea captain &amp; smuggler.</p><p>Loyal to a <b>fault</b> always.<script>x()</script></p>",
+   "avatar": "vale_abc123.webp",
+   "tagIds": [2, 6, 999, 38, 60],
+   "isNsfw": false,
+   "totalToken": 1234,
+   "permanentToken": 800,
+   "createdAtStamp": 1790000000
+  },
+  {
+   "id": "7f7f7f7f-aaaa-bbbb-cccc-ddddeeeeffff",
+   "name": "Night Court",
+   "description": "<div>Second<br>line</div>",
+   "avatar": "night_def456.webp",
+   "tagIds": [46],
+   "isNsfw": true,
+   "totalToken": 2100
+  },
+  {
+   "id": "5e5e5e5e-0000-0000-0000-000000000000",
+   "name": "",
+   "description": "no name, skipped",
+   "isNsfw": false
+  }
+ ],
+ "estimatedTotalHits": 3,
+ "limit": 24,
+ "offset": 0
+}

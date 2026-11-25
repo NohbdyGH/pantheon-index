@@ -201,11 +201,21 @@
    "character"
   ],
   "status": "blocked",
+  "adapter": "jannyai.json",
   "hosts": [
+   "search.jannyai.com",
+   "image.jannyai.com",
    "jannyai.com"
   ],
-  "probe": "https://jannyai.com/",
-  "evidence": "2026-10-15: a Cloudflare challenge on every page, robots.txt included (never bypassed)"
+  "probe": null,
+  "evidence": "2026-11-25: jannyai.com answers a plain request, robots.txt and terms page included, with a Cloudflare challenge (cf-mitigated: challenge), which is never bypassed. The adapter is built and tested on synthetic answers (search.jannyai.com POST, plain transport, browse and link back only) and held: it is switched on only after a live check from a real visitor's page answers with no bot check, with the date recorded.",
+  "crawl": false,
+  "terms": {
+   "url": "https://jannyai.com/terms",
+   "read": "2026-11-25",
+   "verdict": "silent",
+   "note": "Not read: every page of jannyai.com, its terms and robots.txt included, answers a plain request with a Cloudflare challenge, so no clause could be quoted and none was found forbidding third-party search. The search host search.jannyai.com/robots.txt carries only content-signal comments and no rules. Live search only, never crawled or copied into the index, one request per page of 24, no import. Re-read the terms from a real visitor's page before switching it on."
+  }
  },
  {
   "id": "crushon",
@@ -264,10 +274,18 @@
   "status": "blocked",
   "hosts": [
    "app.wyvern.chat",
-   "wyvern.chat"
+   "wyvern.chat",
+   "api.wyvern.chat"
   ],
-  "probe": "https://app.wyvern.chat/",
-  "evidence": "api.wyvern.chat answers 401 (2026-09-02)"
+  "probe": null,
+  "evidence": "2026-11-25: not built. Its terms forbid automated access to its search and API, so no adapter exists and none is probed. Offered only if Wyvern grants written permission.",
+  "crawl": false,
+  "terms": {
+   "url": "https://app.wyvern.chat/policy",
+   "read": "2026-11-25",
+   "verdict": "forbids",
+   "note": "Section 3A of its policy: \"Automated Access is prohibited\" except with prior written permission, and it bars using any \"automated tool to access, query, copy, or monitor\" the service; the only exceptions are search-engine indexing and accessibility tools. Never queried, crawled or probed."
+  }
  },
  {
   "id": "soulweaver",

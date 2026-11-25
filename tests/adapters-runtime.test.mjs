@@ -147,3 +147,28 @@ test("a live-only POST adapter is never crawled", async () => {
   const r = await crawlDeclarative(nos, f, { ts: 1, maxPages: 1 });
   assert.equal(r.pagesFetched, 0); assert.equal(r.records.length, 0); assert.match(r.errors[0].message, /live/);
 });
+
+// JannyAI (2026-11-25): tag table, body filter, sort list.
+const jan = JSON.parse(fs.readFileSync("crawler/adapters/jannyai.json", "utf8"));
+test("validateAdapter accepts the jannyai descriptor and its pinned hosts cover search, avatar and link back", () => {
+  const v = validateAdapter(jan); assert.equal(v.ok, true, v.errors.join());
+  for (const h of ["search.jannyai.com", "image.jannyai.com", "jannyai.com"]) assert.ok(jan.hosts.includes(h), h);
+  assert.equal(jan.crawl, undefined); assert.equal(jan.detail, undefined); assert.equal(jan.probe, null); assert.equal(jan.caps.i, false);
+});
+test("validateAdapter: tagNames, bodyFilter and bodySortList are checked", () => {
+  bad({ ...jan, tagNames: [] }, "tagNames");
+  bad({ ...jan, tagNames: { a: "x" } }, "tagNames");
+  bad({ ...jan, tagNames: { 1: 5 } }, "tagNames");
+  bad({ ...jan, tagNames: { 1: "x".repeat(80) } }, "tagNames");
+  bad({ ...jan, search: { ...jan.search, bodyFilter: { nsfwFalse: 5 } } }, "search.bodyFilter");
+  bad({ ...jan, search: { ...jan.search, bodyFilter: { tokenField: "total Token; x" } } }, "search.bodyFilter");
+  bad({ ...jan, search: { ...jan.search, bodyFilter: [] } }, "search.bodyFilter");
+  bad({ ...jan, search: { ...jan.search, bodySortList: "yes" } }, "search.bodySortList");
+  bad({ ...jan, imageBase: "https://evil.example/" }, "imageBase.host");
+  bad({ ...jan, search: { ...jan.search, map: { ...jan.search.map, o: "https://evil.example/{id}" } } }, "map.o.host");
+});
+test("jannyai is a live-only POST adapter and is never crawled", async () => {
+  const f = createFetcher({ fetchImpl: fakeFetch([]), minIntervalMs: 0 });
+  const r = await crawlDeclarative(jan, f, { ts: 1, maxPages: 1 });
+  assert.equal(r.pagesFetched, 0); assert.equal(r.records.length, 0);
+});
