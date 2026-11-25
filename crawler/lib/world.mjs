@@ -4,7 +4,14 @@
 export const WORLD_TAG = "world";
 // Index sources whose worlds are the owner's own (spec 2026-11-24, part 2.5): their world block is read like the hub's.
 export const FIRST_PARTY_WORLDS = ["blizzard-worlds"];
-const trustsWorld = src => src === "hub" || FIRST_PARTY_WORLDS.includes(src);
+// Index sources where every scenario is a world though its record has no digest (`wd`): the community worlds of the
+// other engine (spec 2026-11-25). Their tile names no people or lore counts, because the index does not know them.
+export const WORLD_SOURCES = ["mno"];
+// Is this record a world on the Worlds page and in world searches: a scenario with a digest from the hub or a
+// first-party source (searches check those themselves), or any scenario from a whole-source world source.
+export const isWorldRecord = rec => Boolean(rec) && rec.k === "scenario" && (Boolean(rec.wd) || WORLD_SOURCES.includes(rec.src));
+// The hub, the owner's worlds, and the world sources whose block Pantheon builds itself from the file (mno, 2026-11-25).
+const trustsWorld = src => src === "hub" || FIRST_PARTY_WORLDS.includes(src) || WORLD_SOURCES.includes(src);
 export const LORE_TYPES = ["place", "faction", "person", "creature", "item", "rule", "history", "other"];
 const wStr = (v, n) => (typeof v === "string" ? v.trim().slice(0, n).trim() : "");
 const wHttps = v => (typeof v === "string" && v.length <= 300 && /^https:\/\/\S+$/.test(v) ? v : null);
@@ -115,7 +122,7 @@ export function typeLore(out, from) {
   return out;
 }
 
-// What a host is handed for a scenario it reads: the block normalised for the hub's own, and no block at all for
+// What a host is handed for a scenario it reads: the block normalised for the trusted sources above, and no block at all for
 // anything else (an index-sourced scenario has none, whatever its source file says).
 export function readWorld(rec, out) {
   if (!out || out.kind !== "scenario" || !out.payload || typeof out.payload !== "object") return out;
