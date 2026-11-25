@@ -1,0 +1,29 @@
+{
+ "total": 2,
+ "limit": 24,
+ "offset": 0,
+ "count": 2,
+ "lorebooks": [
+  {
+   "id": 1727,
+   "name": "Harbor Lore",
+   "creator": "shirubawing",
+   "description": "Places and factions.",
+   "topics": ["worldbuilding", "fantasy"],
+   "entry_count": 54,
+   "token_count": 7171,
+   "nsfw": 0,
+   "file": "a.json",
+   "folder": "a b"
+  },
+  {
+   "id": 1728,
+   "name": "Night Court",
+   "creator": "someone",
+   "description": "",
+   "topics": [],
+   "token_count": 900,
+   "nsfw": 1
+  }
+ ]
+}

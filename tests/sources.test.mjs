@@ -41,3 +41,19 @@ test("every live source carries the terms someone read, with a date and a verdic
   for (const id of ["minitavern", "kobold", "aetherroom"]) assert.equal(sources.find(s => s.id === id).status, "dead", id);
   assert.equal(sources.find(s => s.id === "character-tavern").terms.override.by, "Cash", "read on Cash's decision, 2026-10-20");
 });
+
+// The live sources round (2026-11-25): search only, never crawled, the terms that were read.
+test("charavault and nosfertm are built live-search-only sources, held blocked until a live check answers (2026-11-25), with the terms recorded", () => {
+  const by = id => sources.find(s => s.id === id);
+  for (const id of ["charavault-cards", "charavault-lorebooks", "nosfertm"]) {
+    const s = by(id); assert.ok(s, id); assert.equal(s.status, "blocked", id + ": not offered until it answers a visitor without a bot check"); assert.match(s.evidence, /2026-11-25/); assert.equal(s.crawl, false, id + " is never crawled");
+    assert.equal(s.terms.read, "2026-11-25"); assert.equal(s.terms.verdict, "allows");
+    const a = JSON.parse(fs.readFileSync("crawler/adapters/" + s.adapter, "utf8")); assert.equal(a.id, id); assert.equal(a.caps.s, "live");
+    for (const h of a.hosts) assert.ok(s.hosts.includes(h), `${id}: ${h} is in the register`);
+    assert.equal(s.probe, null, id + " is not probed by the nightly sweep");
+  }
+  assert.match(by("charavault-cards").terms.note, /Reasonable scraping and API usage is permitted/);
+  assert.match(by("charavault-cards").terms.note, /robots\.txt disallows \/api\//);
+  assert.match(by("charavault-lorebooks").terms.note, /charavault-cards/);
+  assert.match(by("nosfertm").terms.note, /MIT/); assert.match(by("nosfertm").terms.note, /CC BY-SA 4\.0/); assert.match(by("nosfertm").terms.note, /credit/);
+});

@@ -1,0 +1,67 @@
+{
+ "id": "charavault-cards",
+ "label": "CharaVault",
+ "kinds": [
+  "character"
+ ],
+ "status": "live",
+ "transport": "super",
+ "caps": {
+  "s": "live",
+  "i": true,
+  "o": true
+ },
+ "hosts": [
+  "charavault.net"
+ ],
+ "search": {
+  "url": "https://charavault.net/api/cards",
+  "params": {
+   "q": "q",
+   "tags": "tags",
+   "sort": "sort",
+   "tokMin": "token_min",
+   "tokMax": "token_max"
+  },
+  "controls": [
+   "q",
+   "nsfw",
+   "sort",
+   "tags",
+   "tokMin",
+   "tokMax"
+  ],
+  "sorts": {
+   "popular": "most_downloaded",
+   "newest": "newest",
+   "top": "top_rated",
+   "comments": "most_commented"
+  },
+  "nsfwFalseOnly": true,
+  "maxQuery": 120,
+  "paging": {
+   "mode": "offset",
+   "size": 24,
+   "start": 1
+  },
+  "items": "results",
+  "map": {
+   "nid": "{folder}/{file}",
+   "n": "name",
+   "b": "description_preview|first_mes_preview",
+   "t": "tags",
+   "nsfw": "nsfw",
+   "cr": "creator",
+   "tok": "token_count",
+   "o": "https://charavault.net/",
+   "pu": "https://charavault.net/cards/{folder~u}/{file~u}"
+  }
+ },
+ "detail": {
+  "transport": "super",
+  "format": "ccv2png"
+ },
+ "origin": "https://charavault.net/",
+ "probe": null,
+ "note": "Live search only, never crawled: its terms allow reasonable scraping and API use, its robots.txt disallows /api/ and /cards/ for crawlers, and its API sends no CORS header, so it goes through the super-fetch proxy at a visitor's request, one request per page of 24. nsfw=false is sent only in Safe mode (leaving it out returns both). The site has no page per card (a single page app), so the link goes to the site. Its cards are served with cross-origin-resource-policy same-site, so a hotlinked thumbnail cannot load on another site and no cover is mapped."
+}

@@ -1,0 +1,38 @@
+{
+ "total": 3,
+ "limit": 24,
+ "offset": 0,
+ "results": [
+  {
+   "file": "Sir Ada (knight)_1001.png",
+   "folder": "cards",
+   "name": "Sir Ada",
+   "creator": "Lumi_Test",
+   "tags": ["knight", "fantasy"],
+   "nsfw": false,
+   "description_preview": "A kind knight of the north.",
+   "first_mes_preview": "Hello, traveller.",
+   "token_count": 640
+  },
+  {
+   "file": "Bram_1002.png",
+   "folder": "cards",
+   "name": "Bram",
+   "creator": "",
+   "tags": [],
+   "nsfw": true,
+   "description_preview": "",
+   "first_mes_preview": "A greeting.",
+   "token_count": 300
+  },
+  {
+   "file": "Nameless_1003.png",
+   "folder": "cards",
+   "name": "",
+   "creator": "x",
+   "tags": [],
+   "nsfw": false,
+   "token_count": 1
+  }
+ ]
+}

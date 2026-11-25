@@ -4,6 +4,11 @@
 //   a[].b      pluck b from each element (flattens one level if b is an array)
 //   x|y        first alternative that is non-empty
 //   {field}    inside a template string: raw substitution from the object
+//   {field~u}  the same, URL-encoded as one component (a file name with spaces or brackets)
+//   {field~p}  the same, encoded segment by segment so its slashes stay (a repository path)
+//              A ~u or ~p field that is empty makes the whole template undefined: a link that cannot be built is
+//              left out instead of pointing at a bare prefix.
+//   A map value that starts with https:// or http:// and has no braces is a literal, the same for every row.
 const isEmpty = v => v === undefined || v === null || v === "" || (Array.isArray(v) && v.length === 0);
 
 function walk(obj, segments) {
@@ -39,18 +44,32 @@ export function get(obj, path) {
   return undefined;
 }
 
+const encodeAs = (mode, v) => (mode === "u" ? encodeURIComponent(v) : v.split("/").map(encodeURIComponent).join("/"));
+const MOD = /^(.*)~([up])$/;
 export function template(str, obj) {
   return String(str).replace(/\{([^}]+)\}/g, (_, p) => {
-    const v = get(obj, p);
-    return v === undefined || v === null ? "" : String(v);
+    const mod = MOD.exec(p);
+    const v = get(obj, mod ? mod[1] : p);
+    if (v === undefined || v === null) return "";
+    return mod ? encodeAs(mod[2], String(v)) : String(v);
   });
 }
+// True when a template holds a ~u or ~p field the row has no value for.
+const missingEncoded = (str, obj) => {
+  for (const m of String(str).matchAll(/\{([^}]+)\}/g)) {
+    const mod = MOD.exec(m[1]);
+    if (mod) { const v = get(obj, mod[1]); if (v === undefined || v === null || v === "") return true; }
+  }
+  return false;
+};
 
 export function mapFields(map, raw) {
   const out = {};
   for (const [k, expr] of Object.entries(map)) {
     if (typeof expr !== "string") continue;
-    out[k] = expr.includes("{") ? template(expr, raw) : get(raw, expr);
+    if (expr.includes("{")) out[k] = missingEncoded(expr, raw) ? undefined : template(expr, raw);
+    else if (/^https?:\/\//.test(expr)) out[k] = expr;
+    else out[k] = get(raw, expr);
   }
   return out;
 }

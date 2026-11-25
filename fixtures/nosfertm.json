@@ -1,0 +1,31 @@
+{
+ "characters": [
+  {
+   "id": "11111111-2222-3333-4444-555555555555",
+   "name": "Sera the Knight",
+   "imageUrl": "https://cdn.jsdelivr.net/gh/nosfertm/perchance-character-database@main/ai-character-chat/characters/sfw/Sera/avatar.png",
+   "author": "Nosfer Fan",
+   "author_id": "aaaaaaaa-0000-0000-0000-000000000000",
+   "is_nsfw": false,
+   "download_path": "ai-character-chat/characters/sfw/Sera by Nosfer Fan/charater.gz",
+   "categories": {
+    "rating": "sfw",
+    "genre": ["Fantasy", "Adventure"],
+    "setting": "Medieval",
+    "features_lorebook": { "present": true },
+    "features_images": ["x"]
+   }
+  },
+  {
+   "id": "66666666-7777-8888-9999-000000000000",
+   "name": "Dark Vow",
+   "imageUrl": "https://evil.example/pic.png",
+   "author": "Someone",
+   "is_nsfw": true,
+   "download_path": null,
+   "categories": { "rating": ["nsfw"] }
+  },
+  null
+ ],
+ "pagination": { "total_count": 2 }
+}

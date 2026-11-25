@@ -1,0 +1,72 @@
+{
+ "id": "nosfertm",
+ "label": "Perchance Character Database",
+ "kinds": [
+  "character"
+ ],
+ "status": "live",
+ "transport": "plain",
+ "caps": {
+  "s": "live",
+  "i": true,
+  "o": true
+ },
+ "hosts": [
+  "lpnsvjanyqhbknpedraq.supabase.co",
+  "nosfertm.github.io",
+  "raw.githubusercontent.com",
+  "cdn.jsdelivr.net",
+  "fastly.jsdelivr.net",
+  "gcore.jsdelivr.net"
+ ],
+ "search": {
+  "url": "https://lpnsvjanyqhbknpedraq.supabase.co/rest/v1/rpc/get_characters",
+  "method": "POST",
+  "headers": {
+   "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxwbnN2amFueXFoYmtucGVkcmFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwNDcxMDEsImV4cCI6MjA1NjYyMzEwMX0.-9Qh-JaPPSBQJD96boDnMsqATveGnpx-DCXBC6K0Gpo",
+   "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxwbnN2amFueXFoYmtucGVkcmFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwNDcxMDEsImV4cCI6MjA1NjYyMzEwMX0.-9Qh-JaPPSBQJD96boDnMsqATveGnpx-DCXBC6K0Gpo",
+   "Accept": "application/json"
+  },
+  "bodyFixed": {
+   "page_size": 24,
+   "sort_by": "alphabetical",
+   "search_term": "",
+   "current_user_id": null
+  },
+  "bodyFields": {
+   "q": "search_term",
+   "page": "page_number"
+  },
+  "params": {},
+  "controls": [
+   "q",
+   "page"
+  ],
+  "maxQuery": 120,
+  "paging": {
+   "mode": "page",
+   "size": 24,
+   "start": 1
+  },
+  "flattenCategories": true,
+  "nsfwIncludes": "categories.rating",
+  "items": "characters",
+  "map": {
+   "nid": "id",
+   "n": "name",
+   "t": "categories",
+   "c": "imageUrl",
+   "nsfw": "is_nsfw",
+   "cr": "author",
+   "o": "https://nosfertm.github.io/perchance-character-database/character-details.html?uuid={id~u}",
+   "pu": "https://raw.githubusercontent.com/nosfertm/perchance-character-database/main/{download_path~p}"
+  }
+ },
+ "detail": {
+  "transport": "plain",
+  "format": "dexiegz"
+ },
+ "origin": "https://nosfertm.github.io/perchance-character-database/",
+ "probe": null,
+ "note": "Live search only, never crawled. The apikey and Authorization values are the public front-end key of the project's own site (docs/js/supabase.js in its MIT-licensed repository, https://github.com/nosfertm/perchance-character-database), copied as published; it is not a secret and grants only what that site's own visitors get. The characters are CC BY-SA 4.0: the creator is always credited (cr) and every record links back to the character's page. The database answers with CORS * so it is reached directly. Response shape: characters[] and pagination.total_count, as read from the project's code; the host answered HTTP 402 (egress quota) on 2026-11-25, so the live shape was not re-confirmed that day."
+}

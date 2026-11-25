@@ -682,5 +682,73 @@
    "verdict": "none",
    "note": "metadata only (title, blurb, tags, cover URL, author name, links) from a public community catalog; no terms page was read for it; each record credits its author and links back to the catalog"
   }
+ },
+ {
+  "id": "charavault-cards",
+  "label": "CharaVault",
+  "kinds": [
+   "character"
+  ],
+  "status": "blocked",
+  "adapter": "charavault-cards.json",
+  "hosts": [
+   "charavault.net"
+  ],
+  "probe": null,
+  "evidence": "2026-11-25: its API answers scripted requests with a Cloudflare challenge (\"Automated access not permitted\") and sends no CORS header, so neither a visitor's browser nor the Perchance proxy can read it without getting past a bot check, which is never done. Built and kept ready; offered again if CharaVault allows perchance.org.",
+  "crawl": false,
+  "terms": {
+   "url": "https://charavault.net/",
+   "read": "2026-11-25",
+   "verdict": "allows",
+   "note": "Reasonable scraping and API usage is permitted (its terms); its robots.txt disallows /api/ for crawlers, so it is never crawled or copied into the index: live search only, at a visitor's request, one request per page of 24"
+  }
+ },
+ {
+  "id": "charavault-lorebooks",
+  "label": "CharaVault Lorebooks",
+  "kinds": [
+   "lorebook"
+  ],
+  "status": "blocked",
+  "adapter": "charavault-lorebooks.json",
+  "hosts": [
+   "charavault.net"
+  ],
+  "probe": null,
+  "evidence": "2026-11-25: its API answers scripted requests with a Cloudflare challenge (\"Automated access not permitted\") and sends no CORS header, so neither a visitor's browser nor the Perchance proxy can read it without getting past a bot check, which is never done. Built and kept ready; offered again if CharaVault allows perchance.org.",
+  "crawl": false,
+  "terms": {
+   "url": "https://charavault.net/",
+   "read": "2026-11-25",
+   "verdict": "allows",
+   "note": "as charavault-cards"
+  }
+ },
+ {
+  "id": "nosfertm",
+  "label": "Perchance Character Database",
+  "kinds": [
+   "character"
+  ],
+  "status": "blocked",
+  "adapter": "nosfertm.json",
+  "hosts": [
+   "lpnsvjanyqhbknpedraq.supabase.co",
+   "nosfertm.github.io",
+   "raw.githubusercontent.com",
+   "cdn.jsdelivr.net",
+   "fastly.jsdelivr.net",
+   "gcore.jsdelivr.net"
+  ],
+  "probe": null,
+  "evidence": "2026-11-25: its database answered HTTP 402 (the project's hosting quota is used up). Built and kept ready; offered again once a live check answers.",
+  "crawl": false,
+  "terms": {
+   "url": "https://github.com/nosfertm/perchance-character-database",
+   "read": "2026-11-25",
+   "verdict": "allows",
+   "note": "code MIT; characters CC BY-SA 4.0, so the creator is always credited and every result links back to the character's page; live search only"
+  }
  }
 ]

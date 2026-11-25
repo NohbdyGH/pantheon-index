@@ -1,8 +1,51 @@
-import { get, template, mapFields } from "./pathlang.mjs";
+import { get } from "./pathlang.mjs";
 import { makeRecord, RecordError, KINDS, FORMATS } from "./record.mjs";
-import { isNsfwTags } from "./normalise.mjs";
+import { readRow } from "./adapter-fields.mjs";
 
 const REQUIRED_MAP = ["nid", "n", "o"];
+
+// The fields the live-only sources use (POST, fixed headers, paging, pinned hosts, field clean-up). An adapter that
+// declares none of them is checked exactly as before. Hosts are the whole allowlist: the search url, every link a row
+// can map (cover, payload, origin) and the image base must sit on one of them.
+const HOST = /^[a-z0-9]([a-z0-9.-]*[a-z0-9])?$/;
+const HEADER_NAME = /^[A-Za-z][A-Za-z0-9-]{0,39}$/;
+const FORBIDDEN_HEADERS = ["cookie", "host", "origin", "referer", "content-length", "transfer-encoding", "connection", "user-agent"];
+function hostOf(u) { try { return new URL(u).hostname; } catch { return null; } }
+// The host a map value or base will request: its literal prefix. A value that starts with a field gives no host.
+function prefixHost(expr) { const m = /^https?:\/\/([^/{?#]+)/.exec(String(expr)); return m ? m[1].toLowerCase() : null; }
+function checkLiveFields(a, s, errors) {
+  const hasHosts = Array.isArray(a.hosts);
+  if (a.hosts !== undefined && (!hasHosts || !a.hosts.length || !a.hosts.every(h => typeof h === "string" && HOST.test(h)))) errors.push("hosts");
+  const method = s.method === undefined ? "GET" : s.method;
+  if (!["GET", "POST"].includes(method)) errors.push("search.method");
+  const hasHeaders = s.headers !== undefined;
+  if (hasHeaders) {
+    const h = s.headers; const names = h && typeof h === "object" && !Array.isArray(h) ? Object.keys(h) : null;
+    if (!names || names.length > 10 || !names.every(n => HEADER_NAME.test(n) && !FORBIDDEN_HEADERS.includes(n.toLowerCase()) && typeof h[n] === "string" && h[n].length <= 500 && !/[\r\n]/.test(h[n]))) errors.push("search.headers");
+  }
+  if ((method === "POST" || hasHeaders) && !hasHosts) errors.push("hosts.required");
+  if (s.bodyFixed !== undefined && !(s.bodyFixed && typeof s.bodyFixed === "object" && !Array.isArray(s.bodyFixed))) errors.push("search.bodyFixed");
+  if (s.bodyFields !== undefined && !(s.bodyFields && typeof s.bodyFields === "object" && !Array.isArray(s.bodyFields) && Object.values(s.bodyFields).every(v => typeof v === "string" && v))) errors.push("search.bodyFields");
+  if (method === "POST" && a.crawl) errors.push("crawl.post");
+  if (s.paging !== undefined) {
+    const p = s.paging;
+    if (!p || typeof p !== "object" || !["page", "offset"].includes(p.mode) || !Number.isInteger(p.size) || p.size < 1 || p.size > 100 || (p.start !== undefined && !(Number.isInteger(p.start) && p.start >= 0))) errors.push("search.paging");
+  }
+  if (s.stripHtml !== undefined && !(Array.isArray(s.stripHtml) && s.stripHtml.every(f => ["n", "b"].includes(f)))) errors.push("search.stripHtml");
+  for (const k of ["flattenCategories", "nsfwFalseOnly"]) if (s[k] !== undefined && typeof s[k] !== "boolean") errors.push("search." + k);
+  if (s.nsfwIncludes !== undefined && (typeof s.nsfwIncludes !== "string" || !s.nsfwIncludes)) errors.push("search.nsfwIncludes");
+  if (s.maxQuery !== undefined && !(Number.isInteger(s.maxQuery) && s.maxQuery >= 1 && s.maxQuery <= 200)) errors.push("search.maxQuery");
+  if (hasHosts && a.hosts.length) {
+    const pinned = a.hosts.map(h => String(h).toLowerCase());
+    const sh = hostOf(s.url); if (!sh || !pinned.includes(sh)) errors.push("hosts.search");
+    for (const [k, expr] of Object.entries(s.map && typeof s.map === "object" ? s.map : {})) {
+      if (!["c", "pu", "o"].includes(k) || typeof expr !== "string") continue;
+      if (/^https?:\/\//.test(expr)) { const ph = prefixHost(expr); if (!ph || !pinned.includes(ph)) errors.push(`map.${k}.host`); }
+      else if (expr.includes("{")) errors.push(`map.${k}.host`);
+    }
+    if (a.imageBase !== undefined) { const ph = prefixHost(a.imageBase); if (!ph || !pinned.includes(ph)) errors.push("imageBase.host"); }
+  }
+}
 export function validateAdapter(a) {
   const errors = [];
   if (!a || typeof a !== "object") return { ok: false, errors: ["not an object"] };
@@ -32,6 +75,7 @@ export function validateAdapter(a) {
     if (!a.gallery.map || typeof a.gallery.map.u !== "string") errors.push("gallery.map.u");
   }
   if (a.crawl && (!Array.isArray(a.crawl.passes) || !Number.isFinite(a.crawl.pages))) errors.push("crawl");
+  if (s && typeof s === "object") checkLiveFields(a, s, errors);
   return { ok: errors.length === 0, errors };
 }
 
@@ -63,19 +107,11 @@ export function sourceDate(v) {
 export function itemsToRecords(a, items, { ts }) {
   const records = []; let skipped = 0;
   for (const raw of Array.isArray(items) ? items : []) {
-    const m = mapFields(a.search.map, raw);
-    const kind = a.kinds[0];
-    const tags = Array.isArray(m.t) ? m.t : typeof m.t === "string" ? m.t.split(",") : [];
-    const nsfw = m.nsfw === true || m.nsfw === "true" || m.nsfw === 1 || isNsfwTags(tags);
-    const pu = m.pu ? String(m.pu) : null;
-    // Some APIs return a bare filename for the cover and expect their own CDN prefix; an adapter
-    // declares that with imageBase, and an absolute URL is left alone.
-    const cover = m.c ? String(m.c) : null;
-    const c = cover && a.imageBase && !/^https?:\/\//i.test(cover) ? a.imageBase + cover.replace(/^\/+/, "") : cover;
+    const { m, tags, nsfw, c, pu, o, cr } = readRow(a, raw);
     try {
       records.push(makeRecord({
         ts: sourceDate(m.ts) || ts,
-        src: a.id, k: kind, nid: m.nid, n: m.n, b: m.b, t: tags, c: c || null, nsfw, o: m.o,
+        src: a.id, k: a.kinds[0], nid: m.nid, n: m.n, b: m.b, t: tags, c, nsfw, o, cr,
         p: pu && a.detail ? { tr: a.detail.transport || a.transport, u: pu, f: a.detail.format } : null,
         caps: { s: a.caps.s, i: Boolean(pu && a.detail), o: true },
         tok: Number(m.tok) || null,
@@ -87,6 +123,8 @@ export function itemsToRecords(a, items, { ts }) {
 
 export async function crawlDeclarative(a, fetcher, { ts, maxPages = a.crawl?.pages ?? 1, log = () => {}, deadline = Infinity }) {
   const byId = new Map(); const errors = []; let pagesFetched = 0;
+  // A POST source, or one that sends fixed headers, is live search only: it is asked at a visitor's request and never walked.
+  if (String(a.search?.method || "GET").toUpperCase() !== "GET" || a.search?.headers) return { records: [], errors: [{ pass: {}, message: `${a.id} is live search only and is not crawled` }], pagesFetched: 0 };
   const passes = a.crawl?.passes?.length ? a.crawl.passes : [{}];
   const start = a.crawl?.pageStart ?? 1;
   for (const pass of passes) {

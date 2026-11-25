@@ -101,3 +101,49 @@ test("a gallery block is optional, and a broken one is refused before it can shi
   assert.ok(bad({ url: "https://x/{nid}", map: { u: "u" } }).includes("gallery.items"));
   assert.ok(bad({ url: "https://x/{nid}", items: "nodes", map: {} }).includes("gallery.map.u"), "with no picture field there is nothing to read");
 });
+
+// The live sources round (2026-11-25): POST, headers, paging, pinned hosts.
+const cv = JSON.parse(fs.readFileSync("crawler/adapters/charavault-cards.json", "utf8"));
+const cvl = JSON.parse(fs.readFileSync("crawler/adapters/charavault-lorebooks.json", "utf8"));
+const nos = JSON.parse(fs.readFileSync("crawler/adapters/nosfertm.json", "utf8"));
+const bad = (a, tail) => { const v = validateAdapter(a); assert.equal(v.ok, false, tail); assert.ok(v.errors.some(e => e.startsWith(tail)), `${tail} in ${v.errors}`); };
+test("validateAdapter accepts the three live-only descriptors", () => { for (const a of [cv, cvl, nos]) { const v = validateAdapter(a); assert.equal(v.ok, true, v.errors.join()); } });
+test("validateAdapter: https only, search url on a pinned host, hosts lower case", () => {
+  bad({ ...cv, search: { ...cv.search, url: "http://charavault.net/api/cards" } }, "search.url");
+  bad({ ...cv, search: { ...cv.search, url: "https://other.example/api/cards" } }, "hosts.search");
+  bad({ ...cv, hosts: ["CharaVault.net"] }, "hosts");
+  bad({ ...cv, hosts: ["https://charavault.net"] }, "hosts");
+});
+test("validateAdapter: map and image links stay on the pinned hosts", () => {
+  bad({ ...cv, search: { ...cv.search, map: { ...cv.search.map, pu: "https://evil.example/{file}" } } }, "map.pu.host");
+  bad({ ...cv, search: { ...cv.search, map: { ...cv.search.map, c: "{thumb}" } } }, "map.c.host");
+  bad({ ...cv, imageBase: "https://evil.example/" }, "imageBase.host");
+});
+test("validateAdapter: POST and headers need pinned hosts; method, headers and body are checked", () => {
+  const { hosts, ...noHosts } = nos; bad(noHosts, "hosts.required");
+  bad({ ...nos, search: { ...nos.search, method: "PUT" } }, "search.method");
+  bad({ ...nos, search: { ...nos.search, headers: { "X Bad": "v" } } }, "search.headers");
+  bad({ ...nos, search: { ...nos.search, headers: { Cookie: "a=b" } } }, "search.headers");
+  bad({ ...nos, search: { ...nos.search, headers: { apikey: "a\r\nb: c" } } }, "search.headers");
+  bad({ ...nos, search: { ...nos.search, headers: { apikey: "x".repeat(600) } } }, "search.headers");
+  bad({ ...nos, search: { ...nos.search, bodyFixed: [] } }, "search.bodyFixed");
+  bad({ ...nos, search: { ...nos.search, bodyFields: { q: 5 } } }, "search.bodyFields");
+  bad({ ...nos, crawl: { passes: [{}], pages: 1 } }, "crawl.post");
+});
+test("validateAdapter: paging, stripHtml, flattenCategories, size caps", () => {
+  bad({ ...cv, search: { ...cv.search, paging: { mode: "cursor", size: 24 } } }, "search.paging");
+  bad({ ...cv, search: { ...cv.search, paging: { mode: "offset", size: 500 } } }, "search.paging");
+  bad({ ...cv, search: { ...cv.search, stripHtml: "b" } }, "search.stripHtml");
+  bad({ ...cv, search: { ...cv.search, flattenCategories: "yes" } }, "search.flattenCategories");
+  bad({ ...cv, search: { ...cv.search, maxQuery: 5000 } }, "search.maxQuery");
+});
+test("itemsToRecords carries the creator and keeps a link off the pinned hosts out", () => {
+  const { records } = itemsToRecords(nos, [{ id: "a", name: "A", author: "Cr", imageUrl: "https://evil.example/x.png", is_nsfw: false, download_path: "d/e f.gz", categories: { rating: "sfw", g: ["Elf"] } }], { ts: 1 });
+  assert.equal(records[0].cr, "Cr"); assert.equal(records[0].c, null); assert.deepEqual(records[0].t, ["elf"]); assert.equal(records[0].p.u, "https://raw.githubusercontent.com/nosfertm/perchance-character-database/main/d/e%20f.gz");
+  assert.equal(validateRecord(records[0]).ok, true);
+});
+test("a live-only POST adapter is never crawled", async () => {
+  const f = createFetcher({ fetchImpl: fakeFetch([]), minIntervalMs: 0 });
+  const r = await crawlDeclarative(nos, f, { ts: 1, maxPages: 1 });
+  assert.equal(r.pagesFetched, 0); assert.equal(r.records.length, 0); assert.match(r.errors[0].message, /live/);
+});

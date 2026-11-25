@@ -1,0 +1,50 @@
+{
+ "id": "charavault-lorebooks",
+ "label": "CharaVault Lorebooks",
+ "kinds": [
+  "lorebook"
+ ],
+ "status": "live",
+ "transport": "super",
+ "caps": {
+  "s": "live",
+  "i": false,
+  "o": true
+ },
+ "hosts": [
+  "charavault.net"
+ ],
+ "search": {
+  "url": "https://charavault.net/api/lorebooks",
+  "params": {
+   "q": "q",
+   "tags": "topics"
+  },
+  "controls": [
+   "q",
+   "nsfw",
+   "tags"
+  ],
+  "nsfwFalseOnly": true,
+  "maxQuery": 120,
+  "paging": {
+   "mode": "offset",
+   "size": 24,
+   "start": 1
+  },
+  "items": "lorebooks",
+  "map": {
+   "nid": "id",
+   "n": "name",
+   "b": "description",
+   "t": "topics",
+   "nsfw": "nsfw",
+   "cr": "creator",
+   "tok": "token_count",
+   "o": "https://charavault.net/lorebooks"
+  }
+ },
+ "origin": "https://charavault.net/lorebooks",
+ "probe": null,
+ "note": "Live search only, browse only: as charavault-cards, one request per page of 24, through super-fetch. Its download route answers 404 for files missing on its disk (seen 2026-11-25), so nothing here is imported. The sort is left to the site's own order."
+}
