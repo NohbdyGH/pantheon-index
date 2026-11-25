@@ -1,0 +1,114 @@
+[
+ {
+  "id": "mno:scenario:w1-alpha",
+  "k": "scenario",
+  "src": "mno",
+  "n": "Test World w1-alpha",
+  "b": "An invented blurb for w1-alpha.",
+  "t": [
+   "Fantasy",
+   "Test"
+  ],
+  "c": "https://user.uploads.dev/file/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.webp",
+  "nsfw": false,
+  "o": "https://perchance.org/mnoengine#explore/w1-alpha",
+  "p": {
+   "tr": "plain",
+   "u": "https://user.uploads.dev/file/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.gz",
+   "f": "mno"
+  },
+  "caps": {
+   "s": "index",
+   "i": true,
+   "o": true
+  },
+  "tok": null,
+  "ts": 1795000000,
+  "lb": false,
+  "cr": "Tester"
+ },
+ {
+  "id": "mno:scenario:w2-beta",
+  "k": "scenario",
+  "src": "mno",
+  "n": "Test World w2-beta",
+  "b": "An invented blurb for w2-beta.",
+  "t": [
+   "Fantasy",
+   "Test"
+  ],
+  "c": null,
+  "nsfw": true,
+  "o": "https://perchance.org/mnoengine#explore/w2-beta",
+  "p": {
+   "tr": "plain",
+   "u": "https://user.uploads.dev/file/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.gz",
+   "f": "mno"
+  },
+  "caps": {
+   "s": "index",
+   "i": true,
+   "o": true
+  },
+  "tok": null,
+  "ts": null,
+  "lb": false,
+  "cr": "Tester"
+ },
+ {
+  "id": "mno:scenario:w3-badpu",
+  "k": "scenario",
+  "src": "mno",
+  "n": "Test World w3-badpu",
+  "b": "An invented blurb for w3-badpu.",
+  "t": [
+   "Fantasy",
+   "Test"
+  ],
+  "c": "https://user.uploads.dev/file/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.webp",
+  "nsfw": false,
+  "o": "https://perchance.org/mnoengine#explore/w3-badpu",
+  "p": {
+   "tr": "plain",
+   "u": "https://evil.example/file/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.gz",
+   "f": "mno"
+  },
+  "caps": {
+   "s": "index",
+   "i": true,
+   "o": true
+  },
+  "tok": null,
+  "ts": 1795000000,
+  "lb": false,
+  "cr": "Tester"
+ },
+ {
+  "id": "mno:scenario:w4-bado",
+  "k": "scenario",
+  "src": "mno",
+  "n": "Test World w4-bado",
+  "b": "An invented blurb for w4-bado.",
+  "t": [
+   "Fantasy",
+   "Test"
+  ],
+  "c": "https://user.uploads.dev/file/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.webp",
+  "nsfw": false,
+  "o": "https://perchance.org/other#explore/w4",
+  "p": {
+   "tr": "plain",
+   "u": "https://user.uploads.dev/file/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.gz",
+   "f": "mno"
+  },
+  "caps": {
+   "s": "index",
+   "i": true,
+   "o": true
+  },
+  "tok": null,
+  "ts": 1795000000,
+  "lb": false,
+  "cr": "Tester"
+ }
+]

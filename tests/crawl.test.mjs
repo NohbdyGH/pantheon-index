@@ -48,10 +48,10 @@ test("runCrawl writes a complete index from fixtures", async () => {
   const result = await runCrawl({ outDir: out, fetcher: fetcher(), now: 1_700_000_000, limits: { huggingface: { datasets: 5, filesPerDataset: 20 }, github: { repos: 5, filesPerRepo: 20 } }, log: () => {} });
   const m = read(path.join(out, "manifest.json"));
   assert.equal(m.v, 1); assert.equal(m.builtAt, 1_700_000_000);
-  assert.deepEqual(Object.keys(m.sources).sort(), ["aicharactercards", "blizzard-worlds", "botbooru", "bronya-rand", "character-tavern", "chub", "chub-lorebooks", "github", "huggingface", "perchance-db", "perchance-rp", "risu-realm"], "fictionlab is crawl:false; the owner's worlds are a source with no files yet");
+  assert.deepEqual(Object.keys(m.sources).sort(), ["aicharactercards", "blizzard-worlds", "botbooru", "bronya-rand", "character-tavern", "chub", "chub-lorebooks", "github", "huggingface", "mno", "perchance-db", "perchance-rp", "risu-realm"], "fictionlab is crawl:false; the owner's worlds are a source with no files yet");
   assert.equal(m.sources["character-tavern"].count, 1, "through its sitemap"); assert.equal(m.sources.aicharactercards.count, 3); assert.equal(m.sources["bronya-rand"].count, 2); assert.equal(m.sources["risu-realm"].count, 2); assert.equal(m.sources.botbooru.count, 2, "characters only: its lorebooks came from /api/, which robots.txt disallows");
   assert.equal(m.sources.chub.count, 2); assert.equal(m.sources["perchance-rp"].count, 2); assert.equal(m.sources.huggingface.count, 2);
-  assert.equal(m.sources["perchance-db"].count, 2);
+  assert.equal(m.sources["perchance-db"].count, 2); assert.equal(m.sources.mno.count, 1626, "the committed MNO snapshot, no network");
   for (const [, s] of Object.entries(m.sources)) for (const f of [...s.heads, ...s.recs]) { assert.ok(fs.existsSync(path.join(out, f)), f); assert.ok(m.hashes[f]); }
   const adapters = read(path.join(out, "adapters.json")); assert.ok(adapters.find(a => a.id === "chub").search); assert.ok(adapters.find(a => a.id === "perchance-rp").caps);
   assert.ok(adapters.find(a => a.id === "fictionlab").search, "crawl:false adapters still ship to the plugin (FictionLab kept on Cash's decision, 2026-10-20)");

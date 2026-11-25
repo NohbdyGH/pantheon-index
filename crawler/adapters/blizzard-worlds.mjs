@@ -3,13 +3,13 @@
 // payload (the world read the way Pantheon reads it, the whole file riding along) is written next to the index under a name
 // that carries its content hash, so a changed world is a new file and no cache serves an old one. Nobody edits the
 // manifest by hand: these records reach the live index the way every source's do, through a crawl that re-pins it.
-import fs from "node:fs/promises"; import path from "node:path"; import { createHash } from "node:crypto";
+import fs from "node:fs/promises"; import path from "node:path"; import { createHash } from "node:crypto"; import { fileURLToPath } from "node:url";
 import { makeRecord, RecordError } from "../lib/record.mjs";
 import { scenarioFromBlizzardSetup } from "../lib/blizzard-setup.mjs";
 import { worldCard } from "../lib/world.mjs";
 import { BASE } from "../lib/manifest.mjs";
 
-const HERE = path.dirname(new URL(import.meta.url).pathname);
+const HERE = path.dirname(fileURLToPath(import.meta.url));
 export const WORLDS_DIR = path.join(HERE, "..", "first-party", "blizzard-worlds");
 export const meta = {
   id: "blizzard-worlds", label: "BlizzardUI worlds", kinds: ["scenario"], status: "live", transport: "crawler",

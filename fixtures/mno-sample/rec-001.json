@@ -1,0 +1,119 @@
+[
+ {
+  "id": "mno:scenario:w5-noname",
+  "k": "scenario",
+  "src": "mno",
+  "n": "",
+  "b": "An invented blurb for w5-noname.",
+  "t": [
+   "Fantasy",
+   "Test"
+  ],
+  "c": "https://user.uploads.dev/file/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.webp",
+  "nsfw": false,
+  "o": "https://perchance.org/mnoengine#explore/w5-noname",
+  "p": {
+   "tr": "plain",
+   "u": "https://user.uploads.dev/file/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.gz",
+   "f": "mno"
+  },
+  "caps": {
+   "s": "index",
+   "i": true,
+   "o": true
+  },
+  "tok": null,
+  "ts": 1795000000,
+  "lb": false,
+  "cr": "Tester"
+ },
+ {
+  "id": "mno:scenario:w1-alpha",
+  "k": "scenario",
+  "src": "mno",
+  "n": "Test World Alpha Newer",
+  "b": "An invented blurb for w1-alpha.",
+  "t": [
+   "Fantasy",
+   "Test"
+  ],
+  "c": "https://user.uploads.dev/file/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.webp",
+  "nsfw": false,
+  "o": "https://perchance.org/mnoengine#explore/w1-alpha",
+  "p": {
+   "tr": "plain",
+   "u": "https://user.uploads.dev/file/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.gz",
+   "f": "mno"
+  },
+  "caps": {
+   "s": "index",
+   "i": true,
+   "o": true
+  },
+  "tok": null,
+  "ts": 1795999999,
+  "lb": false,
+  "cr": "Tester"
+ },
+ {
+  "id": "mno:scenario:w6-badcover",
+  "k": "scenario",
+  "src": "mno",
+  "n": "Test World w6-badcover",
+  "b": "An invented blurb for w6-badcover.",
+  "t": [
+   "Fantasy",
+   "Test"
+  ],
+  "c": "http://user.uploads.dev/x.png",
+  "nsfw": false,
+  "o": "https://perchance.org/mnoengine#explore/w6-badcover",
+  "p": {
+   "tr": "plain",
+   "u": "https://user.uploads.dev/file/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.gz",
+   "f": "mno"
+  },
+  "caps": {
+   "s": "index",
+   "i": true,
+   "o": true
+  },
+  "tok": null,
+  "ts": 1795000000,
+  "lb": false,
+  "cr": "Tester"
+ },
+ {
+  "id": "nope",
+  "n": "x"
+ },
+ null,
+ {
+  "id": "mno:scenario:",
+  "k": "scenario",
+  "src": "mno",
+  "n": "Test World w7-badid",
+  "b": "An invented blurb for w7-badid.",
+  "t": [
+   "Fantasy",
+   "Test"
+  ],
+  "c": "https://user.uploads.dev/file/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.webp",
+  "nsfw": false,
+  "o": "https://perchance.org/mnoengine#explore/w7-badid",
+  "p": {
+   "tr": "plain",
+   "u": "https://user.uploads.dev/file/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.gz",
+   "f": "mno"
+  },
+  "caps": {
+   "s": "index",
+   "i": true,
+   "o": true
+  },
+  "tok": null,
+  "ts": 1795000000,
+  "lb": false,
+  "cr": "Tester"
+ }
+]

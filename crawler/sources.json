@@ -662,5 +662,25 @@
    "verdict": "none",
    "note": "first-party: the owner's own worlds, nothing is fetched from anyone"
   }
+ },
+ {
+  "id": "mno",
+  "label": "MNO RPG Engine",
+  "kinds": [
+   "scenario"
+  ],
+  "status": "live",
+  "adapter": "mno.mjs",
+  "hosts": [
+   "perchance.org"
+  ],
+  "probe": null,
+  "evidence": "2026-11-25: 1,626 user-published worlds in the engine's community catalog, exported from a browser into crawler/snapshots/mno/ (its server answers only its own page); pointer records, the world blobs stay at user.uploads.dev",
+  "terms": {
+   "url": null,
+   "read": "2026-11-25",
+   "verdict": "none",
+   "note": "metadata only (title, blurb, tags, cover URL, author name, links) from a public community catalog; no terms page was read for it; each record credits its author and links back to the catalog"
+  }
  }
 ]
