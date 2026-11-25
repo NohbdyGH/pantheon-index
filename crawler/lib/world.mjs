@@ -35,28 +35,84 @@ export function recommendedOf(r) {
   return n ? out : null;
 }
 
+// A cut that lands on a boundary instead of mid-word: `cutSentence` at the last . ! ? within the limit, `cutComma` at the
+// last comma (the comma itself goes); both fall back to the last space, then to a hard cut. A text within the limit is
+// only trimmed, so cutting a cut text changes nothing.
+const wCut = (v, n, re, comma) => {
+  const t = typeof v === "string" ? v.trim() : ""; if (t.length <= n) return t;
+  const head = t.slice(0, n); let i = -1; for (let k = head.length - 1; k > 0; k--) if (re.test(head[k])) { i = k; break; }
+  if (i > 0) return head.slice(0, comma ? i : i + 1).trim();
+  const sp = head.lastIndexOf(" "); return (sp > 0 ? head.slice(0, sp) : head).trim();
+};
+const cutSentence = (v, n) => wCut(v, n, /[.!?]/, false);
+const cutComma = (v, n) => wCut(v, n, /,/, true);
+// A start, a maximum or a stat value: a finite number, or a short string (an MNO formula begins with "=" and stays verbatim).
+const wVal = v => (typeof v === "number" ? (Number.isFinite(v) ? v : undefined) : typeof v === "string" && v.trim() && v.trim().length <= 120 ? v.trim() : undefined);
+const wEnum = (v, list) => (list.includes(v) ? v : undefined);
+const wNum = v => (typeof v === "number" && Number.isFinite(v) ? v : undefined);
+const wShort = (v, n) => { const t = wStr(v, n + 1); return t && t.length <= n ? t : undefined; };
+const put = (o, k, v) => { if (v !== undefined && v !== "") o[k] = v; };
+const TRIGGER_FIELDS = ["name", "age", "gender", "race", "job", "appearance", "persona", "secret", "extra"];
+// One tracker of the world (npc = false) or of every person in it (npc = true), as the Worlds contract lists them.
+function systemOf(s, npc) {
+  const label = s && typeof s === "object" ? wStr(s.label, 60) : ""; if (!label) return null;
+  const o = { label, meaning: wStr(s.meaning, 300), change: wStr(s.change, 400) };
+  put(o, "kind", wEnum(s.kind, ["number", "text"])); put(o, "start", wVal(s.start)); put(o, "max", wVal(s.max));
+  put(o, "show", wEnum(s.show, npc ? ["profile", "hidden"] : ["header", "hero", "both", "hidden"]));
+  put(o, "key", wShort(s.key, 40)); put(o, "hint", wStr(s.hint, 300)); put(o, "icon", wShort(s.icon, 16));
+  put(o, "color", typeof s.color === "string" && /^#[0-9a-fA-F]{6}$/.test(s.color) ? s.color : undefined);
+  put(o, "display", wEnum(s.display, ["bar", "slider", "text"])); put(o, "followMax", s.followMax === true ? true : wEnum(s.followMax, ["rise", "max"]));
+  put(o, "limitMode", wEnum(s.limitMode, ["cooldown", "budget"])); put(o, "limitTurns", wNum(s.limitTurns)); put(o, "limitAmount", wNum(s.limitAmount));
+  if (npc) {
+    put(o, "default", s.default === true || s.default === false ? s.default : wEnum(s.default, ["trigger"])); put(o, "triggerField", wEnum(s.triggerField, TRIGGER_FIELDS));
+    const raw = Array.isArray(s.triggerWords) ? s.triggerWords : typeof s.triggerWords === "string" ? s.triggerWords.split(",") : [];
+    const words = raw.map(x => wShort(x, 40)).filter(Boolean).slice(0, 20); if (words.length) o.triggerWords = words;
+    put(o, "triggerAge", wShort(s.triggerAge, 20));
+  }
+  return o;
+}
+const systemsOf = (list, npc) => { const out = []; for (const s of Array.isArray(list) ? list : []) { if (out.length === 40) break; const o = systemOf(s, npc); if (o) out.push(o); } return out; };
+// A person's own tracker values: a plain object of at most 60 keys, each a finite number or a string of at most 120.
+function memberTrackers(t) {
+  if (!plainObj(t)) return null; const out = {}; let n = 0;
+  for (const k of Object.keys(t)) {
+    if (n === 60) break; if (!k || k.length > 60 || REC_BAD.has(k)) continue;
+    const v = wVal(t[k]); if (v === undefined) continue; out[k] = v; n++;
+  }
+  return n ? out : null;
+}
+function statsOf(st) {
+  if (!plainObj(st)) return null; const defs = [];
+  for (const d of Array.isArray(st.defs) ? st.defs : []) {
+    if (defs.length === 20) break; const key = plainObj(d) ? wStr(d.key, 40) : ""; if (!key) continue;
+    const o = { key }; put(o, "label", wStr(d.label, 300)); put(o, "hint", wStr(d.hint, 300)); put(o, "start", wVal(d.start)); put(o, "max", wVal(d.max)); put(o, "rules", wStr(d.rules, 300)); defs.push(o);
+  }
+  if (!defs.length) return null; const out = { defs }; put(out, "pointsPerLevel", wNum(st.pointsPerLevel)); put(out, "ccBudget", wNum(st.ccBudget)); return out;
+}
+
 export function worldOf(payload) {
   const w = payload && typeof payload === "object" && !Array.isArray(payload) ? payload.world : null;
   if (!w || typeof w !== "object" || Array.isArray(w)) return null;
+  // An opening with no note is kept only as "staged": the scenario's own intro is then an instruction to the narrator.
   const note = w.opening && typeof w.opening === "object" ? wStr(w.opening.note, 1500) : "";
   const cast = [];
   for (const m of Array.isArray(w.cast) ? w.cast : []) {
     if (cast.length === 24) break;
     const name = m && typeof m === "object" ? wStr(m.name, 300) : "";
     if (!name) continue;
-    cast.push({ name, age: Number.isInteger(m.age) && m.age >= 0 && m.age <= 999 ? m.age : null, role: wStr(m.role, 300), look: wStr(m.look, 300), manner: wStr(m.manner, 300), secret: wStr(m.secret, 400) });
+    const c = { name, age: Number.isInteger(m.age) && m.age >= 0 && m.age <= 999 ? m.age : null, role: wStr(m.role, 300), look: wStr(m.look, 300), manner: wStr(m.manner, 300), secret: wStr(m.secret, 400) };
+    put(c, "ageText", wStr(m.ageText, 60)); const tr = memberTrackers(m.trackers); if (tr) c.trackers = tr;
+    cast.push(c);
   }
-  const systems = [];
-  for (const s of Array.isArray(w.systems) ? w.systems : []) {
-    if (systems.length === 12) break;
-    const label = s && typeof s === "object" ? wStr(s.label, 60) : "";
-    if (label) systems.push({ label, meaning: wStr(s.meaning, 300), change: wStr(s.change, 400) });
-  }
-  const vibe = wStr(w.vibe, 200);
-  if (!vibe && !note && !cast.length && !systems.length) return null;
-  const art = w.style && typeof w.style === "object" ? wStr(w.style.art, 300) : "";
+  const systems = systemsOf(w.systems, false); const npcSystems = systemsOf(w.npcSystems, true);
+  const vibe = cutSentence(w.vibe, 200);
+  if (!vibe && !note && !cast.length && !systems.length && !npcSystems.length) return null;
+  const st = w.style && typeof w.style === "object" ? w.style : {}; const art = cutComma(st.art, 300); const avoid = cutComma(st.avoid, 300);
   const c = w.credit && typeof w.credit === "object" ? { author: wStr(w.credit.author, 80), via: wStr(w.credit.via, 80), url: wHttps(w.credit.url) } : null;
-  const out = { v: 1, vibe, opening: note ? { note, mode: w.opening.mode === "staged" ? "staged" : "plain" } : null, cast, systems, style: art ? { art } : null, credit: c && (c.author || c.via || c.url) ? c : null };
+  const out = { v: 1, vibe, opening: note ? { note, mode: w.opening.mode === "staged" ? "staged" : "plain" } : w.opening && w.opening.mode === "staged" ? { note: "", mode: "staged" } : null, cast, systems };
+  if (npcSystems.length) out.npcSystems = npcSystems;
+  const stats = statsOf(w.stats); if (stats) out.stats = stats;
+  out.style = art || avoid ? { art, ...(avoid ? { avoid } : {}) } : null; out.credit = c && (c.author || c.via || c.url) ? c : null;
   const rec = recommendedOf(w.recommended); if (rec) out.recommended = rec;
   return out;
 }
