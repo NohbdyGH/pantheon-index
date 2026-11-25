@@ -90,6 +90,27 @@ function statsOf(st) {
   if (!defs.length) return null; const out = { defs }; put(out, "pointsPerLevel", wNum(st.pointsPerLevel)); put(out, "ccBudget", wNum(st.ccBudget)); return out;
 }
 
+// Pre-made heroes (2026-11-25): up to 24 playable characters, names unique ignoring case. Age is a whole number or null
+// (a host decides what it plays); pronouns fold to the three a host speaks; a portrait is an https link only; one at most
+// is recommended.
+const PRONOUNS = ["he/him", "she/her", "they/them"];
+function heroesOf(list, statKeys = []) {
+  const out = []; const seen = new Set(); let rec = false;
+  for (const m of Array.isArray(list) ? list : []) {
+    if (out.length === 24) break;
+    const name = m && typeof m === "object" ? wStr(m.name, 100) : ""; if (!name || seen.has(name.toLowerCase())) continue; seen.add(name.toLowerCase());
+    const h = { name, age: Number.isInteger(m.age) && m.age >= 0 && m.age <= 150 ? m.age : null };
+    if (typeof m.pronouns === "string" && m.pronouns.trim()) h.pronouns = PRONOUNS.includes(m.pronouns.trim().toLowerCase()) ? m.pronouns.trim().toLowerCase() : "they/them";
+    put(h, "description", wStr(m.description, 160)); put(h, "look", wStr(m.look, 300)); put(h, "background", wStr(m.background, 400)); put(h, "carries", wStr(m.carries, 120));
+    const pic = wHttps(m.portrait); if (pic && pic.length <= 300) h.portrait = pic;
+    const tr = memberTrackers(m.trackers); if (tr) h.trackers = tr;
+    if (m.stats && typeof m.stats === "object" && !Array.isArray(m.stats)) { const st = {}; for (const k of statKeys) if (typeof m.stats[k] === "number" && Number.isFinite(m.stats[k])) st[k] = m.stats[k]; if (Object.keys(st).length) h.stats = st; }
+    if (m.recommended === true && !rec) { h.recommended = true; rec = true; }
+    out.push(h);
+  }
+  return out;
+}
+
 export function worldOf(payload) {
   const w = payload && typeof payload === "object" && !Array.isArray(payload) ? payload.world : null;
   if (!w || typeof w !== "object" || Array.isArray(w)) return null;
@@ -112,6 +133,7 @@ export function worldOf(payload) {
   const out = { v: 1, vibe, opening: note ? { note, mode: w.opening.mode === "staged" ? "staged" : "plain" } : w.opening && w.opening.mode === "staged" ? { note: "", mode: "staged" } : null, cast, systems };
   if (npcSystems.length) out.npcSystems = npcSystems;
   const stats = statsOf(w.stats); if (stats) out.stats = stats;
+  const heroes = heroesOf(w.heroes, stats ? stats.defs.map(d => d.key) : []); if (heroes.length) out.heroes = heroes;
   out.style = art || avoid ? { art, ...(avoid ? { avoid } : {}) } : null; out.credit = c && (c.author || c.via || c.url) ? c : null;
   const rec = recommendedOf(w.recommended); if (rec) out.recommended = rec;
   return out;
