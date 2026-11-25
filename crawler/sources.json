@@ -644,5 +644,23 @@
   ],
   "probe": null,
   "evidence": "2026-10-15: the host does not resolve"
+ },
+ {
+  "id": "blizzard-worlds",
+  "label": "BlizzardUI worlds",
+  "kinds": [
+   "scenario"
+  ],
+  "status": "live",
+  "adapter": "blizzard-worlds.mjs",
+  "hosts": [],
+  "probe": null,
+  "evidence": "the owner's own world files, kept in this repo (crawler/first-party/blizzard-worlds/)",
+  "terms": {
+   "url": null,
+   "read": "2026-11-24",
+   "verdict": "none",
+   "note": "first-party: the owner's own worlds, nothing is fetched from anyone"
+  }
  }
 ]

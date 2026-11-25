@@ -63,7 +63,7 @@ export async function runCrawl({ outDir, fetcher = createFetcher({ robots: true 
       try {
         const ad = await loadAdapter(s.adapter);
         adapters.push(ad.descriptor);
-        const res = ad.kind === "declarative" ? await crawlDeclarative(ad.a, fetcher, { ts: now, log, deadline }) : await ad.crawl(fetcher, { ts: now, log, limits: limits[s.id], deadline, previous: prev });
+        const res = ad.kind === "declarative" ? await crawlDeclarative(ad.a, fetcher, { ts: now, log, deadline }) : await ad.crawl(fetcher, { ts: now, log, limits: limits[s.id], deadline, previous: prev, outDir });
         fresh = res.records; adapterErrors = res.errors || []; retire = Array.isArray(res.retire) ? res.retire : [];
         if (fresh.length === 0 && adapterErrors.length) { ok = false; errMsg = adapterErrors[0].message; }
       } catch (e) { ok = false; errMsg = String(e.message || e); }

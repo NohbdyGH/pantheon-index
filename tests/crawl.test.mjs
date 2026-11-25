@@ -48,7 +48,7 @@ test("runCrawl writes a complete index from fixtures", async () => {
   const result = await runCrawl({ outDir: out, fetcher: fetcher(), now: 1_700_000_000, limits: { huggingface: { datasets: 5, filesPerDataset: 20 }, github: { repos: 5, filesPerRepo: 20 } }, log: () => {} });
   const m = read(path.join(out, "manifest.json"));
   assert.equal(m.v, 1); assert.equal(m.builtAt, 1_700_000_000);
-  assert.deepEqual(Object.keys(m.sources).sort(), ["aicharactercards", "botbooru", "bronya-rand", "character-tavern", "chub", "chub-lorebooks", "github", "huggingface", "perchance-db", "perchance-rp", "risu-realm"], "fictionlab is crawl:false");
+  assert.deepEqual(Object.keys(m.sources).sort(), ["aicharactercards", "blizzard-worlds", "botbooru", "bronya-rand", "character-tavern", "chub", "chub-lorebooks", "github", "huggingface", "perchance-db", "perchance-rp", "risu-realm"], "fictionlab is crawl:false; the owner's worlds are a source with no files yet");
   assert.equal(m.sources["character-tavern"].count, 1, "through its sitemap"); assert.equal(m.sources.aicharactercards.count, 3); assert.equal(m.sources["bronya-rand"].count, 2); assert.equal(m.sources["risu-realm"].count, 2); assert.equal(m.sources.botbooru.count, 2, "characters only: its lorebooks came from /api/, which robots.txt disallows");
   assert.equal(m.sources.chub.count, 2); assert.equal(m.sources["perchance-rp"].count, 2); assert.equal(m.sources.huggingface.count, 2);
   assert.equal(m.sources["perchance-db"].count, 2);

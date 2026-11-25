@@ -83,5 +83,5 @@ export function validateRecord(r) {
 // showed the identical twelve cards (seen live 2026-09-03). Two numbers per record, ~0.5 MB across
 // the whole index, and the rows become different pages.
 // lb rides along only when true: most records have no book, and the heads stay the size they were.
-export const toHead = r => Object.assign({ id: r.id, n: r.n, t: r.t, k: r.k, nsfw: r.nsfw, c: r.c, ts: r.ts, tok: r.tok }, r.lb === true ? { lb: 1 } : {});
+export const toHead = r => Object.assign({ id: r.id, n: r.n, t: r.t, k: r.k, nsfw: r.nsfw, c: r.c, ts: r.ts, tok: r.tok }, r.lb === true ? { lb: 1 } : {}, r.wd && typeof r.wd === "object" ? { wd: r.wd } : {});
 export const applyNsfwGuard = r => (r.nsfw ? { ...r, b: null } : { ...r });
