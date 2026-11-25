@@ -3,7 +3,7 @@
 // The plugin bundles it and the tests import it. The hub's server block never reads a payload, so it does not use it.
 export const WORLD_TAG = "world";
 // Index sources whose worlds are the owner's own (spec 2026-11-24, part 2.5): their world block is read like the hub's.
-export const FIRST_PARTY_WORLDS = ["blizzard-worlds"];
+export const FIRST_PARTY_WORLDS = ["blizzard-worlds", "last-horizon-worlds"];
 // Index sources where every scenario is a world though its record has no digest (`wd`): the community worlds of the
 // other engine (spec 2026-11-25). Their tile names no people or lore counts, because the index does not know them.
 export const WORLD_SOURCES = ["mno"];

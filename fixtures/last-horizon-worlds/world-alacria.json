@@ -1,0 +1,71 @@
+{
+ "about": "Last Horizon, by Nohbdy. World, build 00000001.",
+ "world": "alacria",
+ "file": {
+  "scenario": {
+   "adult": false
+  }
+ },
+ "pantheon": {
+  "k": "scenario",
+  "n": "Alacria",
+  "b": "A premise for alacria.",
+  "t": [
+   "isekai",
+   "high fantasy"
+  ],
+  "nsfw": false,
+  "c": null,
+  "payload": {
+   "title": "Alacria",
+   "blurb": "A premise.",
+   "overview": "o",
+   "intro": "i",
+   "starters": [
+    "s"
+   ],
+   "tags": [
+    "isekai"
+   ],
+   "from": {
+    "app": "last-horizon",
+    "id": "alacria"
+   },
+   "lore": {
+    "entries": [
+     {
+      "keys": [
+       "k"
+      ],
+      "content": "c"
+     }
+    ]
+   },
+   "world": {
+    "v": 1,
+    "vibe": "Grand, cold and subtly menacing.",
+    "opening": {
+     "note": "The flash fades.",
+     "mode": "staged"
+    },
+    "cast": [
+     {
+      "name": "Mira",
+      "age": 30,
+      "role": "guide",
+      "look": "tall",
+      "manner": "dry",
+      "secret": "x"
+     }
+    ],
+    "systems": [],
+    "style": null,
+    "credit": {
+     "author": "Nohbdy",
+     "via": "Last Horizon",
+     "url": null
+    }
+   }
+  }
+ }
+}

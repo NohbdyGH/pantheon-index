@@ -682,6 +682,24 @@
   }
  },
  {
+  "id": "last-horizon-worlds",
+  "label": "Last Horizon worlds",
+  "kinds": [
+   "scenario"
+  ],
+  "status": "live",
+  "adapter": "last-horizon-worlds.mjs",
+  "hosts": [],
+  "probe": null,
+  "evidence": "the owner's own worlds, published by the game as plain files in its assets repo (last-horizon/manifest-2.json); each fetched at its own commit and checked against the manifest's bytes and sha256",
+  "terms": {
+   "url": null,
+   "read": "2026-11-25",
+   "verdict": "none",
+   "note": "first-party: the owner's own worlds"
+  }
+ },
+ {
   "id": "mno",
   "label": "MNO RPG Engine",
   "kinds": [

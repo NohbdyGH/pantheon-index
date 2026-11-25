@@ -1,0 +1,67 @@
+{
+ "about": "x",
+ "world": "wrongfrom",
+ "file": {},
+ "pantheon": {
+  "k": "scenario",
+  "n": "Wrongfrom",
+  "b": "A premise for wrongfrom.",
+  "t": [
+   "isekai",
+   "high fantasy"
+  ],
+  "nsfw": false,
+  "c": null,
+  "payload": {
+   "title": "Wrongfrom",
+   "blurb": "A premise.",
+   "overview": "o",
+   "intro": "i",
+   "starters": [
+    "s"
+   ],
+   "tags": [
+    "isekai"
+   ],
+   "from": {
+    "app": "last-horizon",
+    "id": "someone-else"
+   },
+   "lore": {
+    "entries": [
+     {
+      "keys": [
+       "k"
+      ],
+      "content": "c"
+     }
+    ]
+   },
+   "world": {
+    "v": 1,
+    "vibe": "Grand, cold and subtly menacing.",
+    "opening": {
+     "note": "The flash fades.",
+     "mode": "staged"
+    },
+    "cast": [
+     {
+      "name": "Mira",
+      "age": 30,
+      "role": "guide",
+      "look": "tall",
+      "manner": "dry",
+      "secret": "x"
+     }
+    ],
+    "systems": [],
+    "style": null,
+    "credit": {
+     "author": "Nohbdy",
+     "via": "Last Horizon",
+     "url": null
+    }
+   }
+  }
+ }
+}

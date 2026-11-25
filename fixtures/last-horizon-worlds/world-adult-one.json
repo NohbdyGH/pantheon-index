@@ -1,0 +1,9 @@
+{
+ "about": "Last Horizon, by Nohbdy. World, build 00000002.",
+ "world": "adult-one",
+ "file": {
+  "scenario": {
+   "adult": true
+  }
+ }
+}

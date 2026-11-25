@@ -39,6 +39,7 @@ function fetcher(overrides = []) {
     { match: /botbooru\.com\/posts\/\?offset=0&/, body: read("fixtures/bb-posts.json") }, { match: "https://botbooru.com/posts/?", body: { total: 2, posts: [] } }, { match: "https://botbooru.com/api/lorebooks?offset=0", body: read("fixtures/bb-lorebooks.json") }, { match: "https://botbooru.com/api/lorebooks?", body: { items: [], total: 1 } },
     { match: "https://rentry.org/", body: fs.readFileSync("fixtures/rentry-raw.txt", "utf8"), kind: "text" }, { match: "https://blocky-mint.github.io/", body: "<a href='https://chub.ai/'>x</a>", kind: "text" },
     { match: "https://raw.githubusercontent.com/nosfertm/perchance-character-database/main/ai-character-chat/characters/index.json", body: read("fixtures/perchance-db-sample.json") },
+    { match: "https://cdn.jsdelivr.net/gh/PEEPEEBOY69/nohbdy-assets@main/last-horizon/manifest-2.json", body: { format: 2, files: [] } },
     { match: /^https:\/\//, body: "<html>ok</html>", kind: "text", headers: { "access-control-allow-origin": "*" } },
   ]) });
 }
@@ -48,7 +49,7 @@ test("runCrawl writes a complete index from fixtures", async () => {
   const result = await runCrawl({ outDir: out, fetcher: fetcher(), now: 1_700_000_000, limits: { huggingface: { datasets: 5, filesPerDataset: 20 }, github: { repos: 5, filesPerRepo: 20 } }, log: () => {} });
   const m = read(path.join(out, "manifest.json"));
   assert.equal(m.v, 1); assert.equal(m.builtAt, 1_700_000_000);
-  assert.deepEqual(Object.keys(m.sources).sort(), ["aicharactercards", "blizzard-worlds", "botbooru", "bronya-rand", "character-tavern", "chub", "chub-lorebooks", "github", "huggingface", "mno", "perchance-db", "perchance-rp", "risu-realm"], "fictionlab is crawl:false; the owner's worlds are a source with no files yet");
+  assert.deepEqual(Object.keys(m.sources).sort(), ["aicharactercards", "blizzard-worlds", "botbooru", "bronya-rand", "character-tavern", "chub", "chub-lorebooks", "github", "huggingface", "last-horizon-worlds", "mno", "perchance-db", "perchance-rp", "risu-realm"], "fictionlab is crawl:false; the owner's worlds are a source with no files yet");
   assert.equal(m.sources["character-tavern"].count, 1, "through its sitemap"); assert.equal(m.sources.aicharactercards.count, 3); assert.equal(m.sources["bronya-rand"].count, 2); assert.equal(m.sources["risu-realm"].count, 2); assert.equal(m.sources.botbooru.count, 2, "characters only: its lorebooks came from /api/, which robots.txt disallows");
   assert.equal(m.sources.chub.count, 2); assert.equal(m.sources["perchance-rp"].count, 2); assert.equal(m.sources.huggingface.count, 2);
   assert.equal(m.sources["perchance-db"].count, 2); assert.equal(m.sources.mno.count, 1626, "the committed MNO snapshot, no network");
