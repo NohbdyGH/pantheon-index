@@ -1,6 +1,6 @@
 export const BASE = {
-  primary: "https://cdn.jsdelivr.net/gh/PEEPEEBOY69/pantheon-index@main/index/",
-  fallback: "https://raw.githubusercontent.com/PEEPEEBOY69/pantheon-index/main/index/",
+  primary: "https://cdn.jsdelivr.net/gh/NohbdyGH/pantheon-index@main/index/",
+  fallback: "https://raw.githubusercontent.com/NohbdyGH/pantheon-index/main/index/",
 };
 export function buildManifest({ builtAt, sources, hashes = {} }) {
   const all = { ...hashes };

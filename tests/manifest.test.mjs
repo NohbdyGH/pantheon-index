@@ -6,5 +6,5 @@ test("buildManifest shape", () => {
   assert.equal(m.v, 1); assert.equal(m.builtAt, 123); assert.equal(m.sources.chub.count, 2);
   assert.equal(m.adaptersUrl, "adapters.json"); assert.equal(m.sourcesUrl, "sources.json"); assert.equal(m.targetsUrl, "targets.json");
   assert.equal(m.hashes["chub/rec-000.json"], "ab"); assert.equal(m.hashes["adapters.json"], "cd");
-  assert.equal(m.base.primary, "https://cdn.jsdelivr.net/gh/PEEPEEBOY69/pantheon-index@main/index/");
+  assert.equal(m.base.primary, "https://cdn.jsdelivr.net/gh/NohbdyGH/pantheon-index@main/index/");
 });
