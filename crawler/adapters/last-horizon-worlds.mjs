@@ -65,7 +65,8 @@ export async function crawl(fetcher, { ts, log = () => {}, outDir = null } = {})
     const pan = file.pantheon; const id = file.world;
     const p = plain(pan) ? pan.payload : null;
     if (!plain(pan) || pan.k !== "scenario") { errors.push({ message: label + ": pantheon is not a scenario record" }); continue; }
-    if (pan.nsfw !== false) { errors.push({ message: label + ": pantheon is not nsfw:false" }); continue; }
+    // An adult world is listed flagged 18+ (owner, 2026-11-26); Safe mode hides it until the visitor picks 18+.
+    if (typeof pan.nsfw !== "boolean") { errors.push({ message: label + ": pantheon nsfw is not a boolean" }); continue; }
     if (!plain(p)) { errors.push({ message: label + ": pantheon has no payload" }); continue; }
     if (!plain(p.from) || p.from.app !== "last-horizon" || p.from.id !== id) { errors.push({ message: label + ": payload.from.id is not the world id " + id }); continue; }
     if (!worldOf(p)) { errors.push({ message: label + ": the world block reads to nothing" }); continue; }
@@ -74,7 +75,7 @@ export async function crawl(fetcher, { ts, log = () => {}, outDir = null } = {})
     const rel = meta.id + "/payloads/" + id + "-" + hash + ".json"; const recId = `${meta.id}:scenario:${id}`;
     let rec;
     try {
-      rec = makeRecord({ src: meta.id, k: "scenario", nid: id, n: pan.n, b: pan.b, t: pan.t, c: pan.c ?? null, nsfw: false, o: ORIGIN + recId, p: { tr: "index", u: BASE.primary + rel, f: "hubjson" }, caps: meta.caps, ts, cr: "Nohbdy" });
+      rec = makeRecord({ src: meta.id, k: "scenario", nid: id, n: pan.n, b: pan.b, t: pan.t, c: pan.c ?? null, nsfw: pan.nsfw, o: ORIGIN + recId, p: { tr: "index", u: BASE.primary + rel, f: "hubjson" }, caps: meta.caps, ts, cr: "Nohbdy" });
     } catch (err) { if (err instanceof RecordError) { errors.push({ message: label + ": " + err.message }); continue; } throw err; }
     try {
       if (outDir) { await fs.mkdir(path.join(outDir, meta.id, "payloads"), { recursive: true }); await fs.writeFile(path.join(outDir, rel), body); }

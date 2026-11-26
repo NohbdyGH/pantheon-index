@@ -69,12 +69,20 @@ test("a pantheon whose from.id is not the file's world is an error", async () =>
   const r = await crawl(fetcher, { ts: 1 }); assert.equal(r.records.length, 0); assert.match(r.errors[0].message, /from\.id/);
 });
 
-test("a nsfw pantheon, or one whose world block reads to nothing, is an error", async () => {
-  const mk = (id, mut) => { const f = JSON.parse(bytesOf("world-alacria")); f.world = id; f.pantheon.payload.from.id = id; mut(f.pantheon); const b = Buffer.from(JSON.stringify(f)); return { e: { part: "world-" + id, name: "world-" + id + ".00000000.json", as: "world", sealed: false, commit: C1, bytes: b.length, sha256: sha(b) }, b }; };
-  const nsfw = mk("hot", p => { p.nsfw = true; }), empty = mk("hollow", p => { p.payload.world = { v: 1 }; });
+// 2026-11-26 (owner): an adult world is listed too, flagged 18+, so Safe mode hides it until the visitor picks 18+.
+test("an adult pantheon is listed flagged nsfw; nsfw must be a boolean", async () => {
+  const mk = (id, mut) => { const f = JSON.parse(bytesOf("world-alacria")); f.world = id; f.pantheon.payload.from.id = id; mut(f.pantheon); const b = Buffer.from(JSON.stringify(f)); return { e: { part: "world-" + id, name: "world-" + id + ".00000000.json", as: "world", sealed: false, commit: C1, bytes: b.length, sha256: createHash("sha256").update(b).digest("hex") }, b }; };
+  const hot = mk("hot", p => { p.nsfw = true; }), odd = mk("odd", p => { p.nsfw = "yes"; });
   const route = x => ({ match: "https://cdn.jsdelivr.net/gh/PEEPEEBOY69/nohbdy-assets@" + C1 + "/last-horizon/" + x.e.name, kind: "bytes", body: new Uint8Array(x.b) });
-  const { fetcher } = rig([nsfw.e, empty.e], [route(nsfw), route(empty)]);
-  const r = await crawl(fetcher, { ts: 1 }); assert.equal(r.records.length, 0); assert.equal(r.errors.length, 2);
+  const { fetcher } = rig([hot.e, odd.e], [route(hot), route(odd)]);
+  const r = await crawl(fetcher, { ts: 1 }); assert.equal(r.records.length, 1); assert.equal(r.records[0].nsfw, true); assert.equal(r.errors.length, 1);
+});
+test("a pantheon whose world block reads to nothing is an error", async () => {
+  const mk = (id, mut) => { const f = JSON.parse(bytesOf("world-alacria")); f.world = id; f.pantheon.payload.from.id = id; mut(f.pantheon); const b = Buffer.from(JSON.stringify(f)); return { e: { part: "world-" + id, name: "world-" + id + ".00000000.json", as: "world", sealed: false, commit: C1, bytes: b.length, sha256: sha(b) }, b }; };
+  const empty = mk("hollow", p => { p.payload.world = { v: 1 }; });
+  const route = x => ({ match: "https://cdn.jsdelivr.net/gh/PEEPEEBOY69/nohbdy-assets@" + C1 + "/last-horizon/" + x.e.name, kind: "bytes", body: new Uint8Array(x.b) });
+  const { fetcher } = rig([empty.e], [route(empty)]);
+  const r = await crawl(fetcher, { ts: 1 }); assert.equal(r.records.length, 0); assert.equal(r.errors.length, 1);
 });
 
 test("an unreachable manifest is an error and no records, so the merge keeps last night's shards", async () => {
