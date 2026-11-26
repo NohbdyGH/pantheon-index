@@ -76,8 +76,8 @@ test("jannyai is a built live-search-only source held blocked, and wyvern is blo
 // in the destination. A kind without a date is never offered. "world" is a scenario that carries a world, checked
 // separately from plain scenarios; nothing has been checked with a world yet, so no target carries one.
 // The dates were seeded only from what each note already recorded.
-const WORKS = { "ai-character-chat": { character: "2026-09-02" }, "blizzardui": { character: "2026-09-09", lorebook: "2026-09-09", scenario: "2026-09-09" }, "aether": { character: "2026-09-09", lorebook: "2026-09-09", scenario: "2026-09-09" }, "last-horizon": {}, "ai-rpg": { scenario: "2026-09-02" }, "as-rpg": { scenario: "2026-11-02" }, "ai-girlfriend-chat": { character: "2026-09-05" }, "aschat": { character: "2026-09-05" }, "fur-ai": {}, "scenario-petrafiedacc": { character: "2026-09-05" }, "sonder": { character: "2026-10-21" }, "mnoengine": { scenario: "2026-11-02" }, "vellum": {} };
-test("targets: every one carries works, dated per kind, each date already in its note; no world yet; verified agrees", () => {
+const WORKS = { "ai-character-chat": { "character": "2026-09-02" }, "blizzardui": { "character": "2026-09-09", "lorebook": "2026-09-09", "scenario": "2026-09-09", "world": "2026-09-09" }, "aether": { "character": "2026-09-09", "lorebook": "2026-09-09", "scenario": "2026-09-09", "world": "2026-09-09" }, "last-horizon": {}, "ai-rpg": { "scenario": "2026-09-02", "world": "2026-09-02" }, "as-rpg": { "scenario": "2026-11-02", "world": "2026-11-02" }, "ai-girlfriend-chat": { "character": "2026-09-05" }, "aschat": { "character": "2026-09-05" }, "fur-ai": {}, "scenario-petrafiedacc": { "character": "2026-09-05" }, "sonder": { "character": "2026-10-21" }, "mnoengine": { "scenario": "2026-11-02", "world": "2026-11-26" }, "vellum": {}};
+test("targets: every one carries works, dated per kind, each date already in its note; a world follows its importer's scenario route (2026-11-26); verified agrees", () => {
   assert.deepEqual(targets.map(t => t.id).sort(), Object.keys(WORKS).sort(), "every target is in the table");
   for (const t of targets) {
     assert.ok(t.works && typeof t.works === "object" && !Array.isArray(t.works), t.id + " has works");
@@ -88,7 +88,8 @@ test("targets: every one carries works, dated per kind, each date already in its
       assert.ok(t.note.includes(d), t.id + ": the date " + d + " is in the note");
       if (k !== "world") assert.ok(t.kinds.includes(k), t.id + ": " + k + " is one of its kinds");
     }
-    assert.equal(t.works.world, undefined, t.id + ": no world has been checked live yet");
+    if (t.works.world) assert.ok(t.works.world === t.works.scenario || t.id === "mnoengine", t.id + ": a world goes by the scenario route, except the MNO engine, which opens the file itself");
+    if (t.id === "blizzardui") assert.ok(!(t.accepts || []).includes("mno-world"), "the raw MNO file waits for BlizzardUI 2.45");
     assert.equal(t.verified, Object.keys(t.works).length > 0, t.id + ": verified stays true exactly when some kind is proven");
   }
 });
