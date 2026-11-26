@@ -14,7 +14,10 @@ test("each world file becomes a scenario record with its world digest and a payl
   assert.equal(meta.id, "blizzard-worlds");
 });
 test("no folder means no records and no error", async () => { const r = await crawl(null, { ts: 1, dir: "/nonexistent-dir-xyz" }); assert.deepEqual(r, { records: [], errors: [] }); });
-test("the crawler's copies of the world readers are Pantheon's own, byte for byte apart from one import path", () => {
+// The comparison needs Pantheon beside this repo (its nested checkout). On the crawl's runner only this repo exists, so the
+// test skips there; Pantheon's own tests hold the same pin from its side.
+const pantheonBeside = fs.existsSync(path.join(path.resolve(".."), "src/shared/world.mjs"));
+test("the crawler's copies of the world readers are Pantheon's own, byte for byte apart from one import path", { skip: pantheonBeside ? false : "Pantheon is not checked out beside the index" }, () => {
   const root = path.resolve("..");
   assert.equal(fs.readFileSync("crawler/lib/world.mjs", "utf8"), fs.readFileSync(path.join(root, "src/shared/world.mjs"), "utf8"));
   assert.equal(fs.readFileSync("crawler/lib/blizzard-setup.mjs", "utf8"), fs.readFileSync(path.join(root, "src/plugin/blizzard-setup.mjs"), "utf8").replace('from "../shared/world.mjs"', 'from "./world.mjs"'));
