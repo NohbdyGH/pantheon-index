@@ -29,13 +29,13 @@
   "works": {
    "character": "2026-09-09",
    "lorebook": "2026-09-09",
-   "scenario": "2026-09-09"
+   "scenario": "2026-09-09",
+   "world": "2026-09-09"
   },
-  "note": "Read from its source 2026-09-09: its perchance-ai-rpg-v1 importer maps codexStructured.npcs[] to the cast, the protagonist fields to the protagonist, and codexTrackedInfo to a locked lore entry — so characters and lorebooks ride the same #data=uup1: door as scenarios, with no receiver code anywhere.",
+  "note": "Read from its source 2026-09-09: its perchance-ai-rpg-v1 importer maps codexStructured.npcs[] to the cast, the protagonist fields to the protagonist, and codexTrackedInfo to a locked lore entry — so characters and lorebooks ride the same #data=uup1: door as scenarios, with no receiver code anywhere. 2026-11-26: mno-world taken out of accepts until BlizzardUI 2.45 (which reads that file) is live; worlds go by the adventure conversion meanwhile. A world is a scenario with a block, so world follows each importer's scenario route.",
   "format": "airpg-upload",
   "accepts": [
-   "blizzardui-setup",
-   "mno-world"
+   "blizzardui-setup"
   ]
  },
  {
@@ -52,7 +52,8 @@
   "works": {
    "character": "2026-09-09",
    "lorebook": "2026-09-09",
-   "scenario": "2026-09-09"
+   "scenario": "2026-09-09",
+   "world": "2026-09-09"
   },
   "note": "Same importer as BlizzardUI. Read from its source 2026-09-09: its perchance-ai-rpg-v1 importer maps codexStructured.npcs[] to the cast, the protagonist fields to the protagonist, and codexTrackedInfo to a locked lore entry — so characters and lorebooks ride the same #data=uup1: door as scenarios, with no receiver code anywhere.",
   "format": "airpg-upload"
@@ -80,7 +81,8 @@
   "format": "airpg-upload",
   "verified": true,
   "works": {
-   "scenario": "2026-09-02"
+   "scenario": "2026-09-02",
+   "world": "2026-09-02"
   },
   "note": "2026-09-02: ai-rpg loads #data=uup1:<upload> / #data=<url> as a shared adventure (format perchance-ai-rpg-v1, read from its source)"
  },
@@ -95,7 +97,8 @@
   "format": "airpg-upload",
   "verified": true,
   "works": {
-   "scenario": "2026-11-02"
+   "scenario": "2026-11-02",
+   "world": "2026-11-02"
   },
   "note": "read from its source 2026-11-02: #data=uup1:<file> (or a URL), plain or .gz, parsed as perchance-ai-rpg-v1 and added as a new adventure, the same contract as ai-rpg."
  },
@@ -186,9 +189,10 @@
   "format": "mno-upload",
   "verified": true,
   "works": {
-   "scenario": "2026-11-02"
+   "scenario": "2026-11-02",
+   "world": "2026-11-26"
   },
-  "note": "read from its source 2026-11-02: ?importdata=[<name>~]<32 hex>.gz, fetched only from user.uploads.dev and gunzipped; an mno-world file loads directly. The plugin builds the world, uploads it gzipped and checks the name it gets back; when the name is not <32 hex>.gz the world downloads and MNO opens on Import World."
+  "note": "read from its source 2026-11-02: ?importdata=[<name>~]<32 hex>.gz, fetched only from user.uploads.dev and gunzipped; an mno-world file loads directly. The plugin builds the world, uploads it gzipped and checks the name it gets back; when the name is not <32 hex>.gz the world downloads and MNO opens on Import World. 2026-11-26: an MNO world opens from its own file through ?importdata= (no copy)."
  },
  {
   "id": "vellum",
