@@ -27,16 +27,16 @@
    "status": 200,
    "cors": true,
    "kind": "json",
-   "ms": 402,
-   "at": 1795616439,
+   "ms": 205,
+   "at": 1795651428,
    "consecutiveFailures": 0,
    "bytes": 2191
   },
   "lastCrawl": {
-   "at": 1795616439,
+   "at": 1795651428,
    "ok": true,
-   "count": 126693,
-   "fresh": 114250,
+   "count": 127381,
+   "fresh": 114752,
    "error": null,
    "errors": 0
   }
@@ -62,15 +62,15 @@
    "status": 200,
    "cors": true,
    "kind": "json",
-   "ms": 251,
-   "at": 1795616439,
+   "ms": 278,
+   "at": 1795651428,
    "consecutiveFailures": 0,
    "bytes": 1522
   },
   "lastCrawl": {
-   "at": 1795616439,
+   "at": 1795651428,
    "ok": true,
-   "count": 12551,
+   "count": 12555,
    "fresh": 11993,
    "error": null,
    "errors": 0
@@ -105,9 +105,9 @@
    "status": 403,
    "cors": false,
    "kind": "challenge",
-   "ms": 162,
-   "at": 1795616439,
-   "consecutiveFailures": 106,
+   "ms": 196,
+   "at": 1795651428,
+   "consecutiveFailures": 107,
    "error": "http"
   }
  },
@@ -132,13 +132,13 @@
    "status": 200,
    "cors": true,
    "kind": "json",
-   "ms": 582,
-   "at": 1795616439,
+   "ms": 739,
+   "at": 1795651428,
    "consecutiveFailures": 0,
    "bytes": 9956468
   },
   "lastCrawl": {
-   "at": 1795616439,
+   "at": 1795651428,
    "ok": true,
    "count": 723,
    "fresh": 723,
@@ -169,13 +169,13 @@
    "status": 200,
    "cors": true,
    "kind": "other",
-   "ms": 385,
-   "at": 1795616439,
+   "ms": 183,
+   "at": 1795651428,
    "consecutiveFailures": 0,
    "bytes": 2053305
   },
   "lastCrawl": {
-   "at": 1795616439,
+   "at": 1795651428,
    "ok": true,
    "count": 926,
    "fresh": 926,
@@ -207,13 +207,13 @@
    "status": 200,
    "cors": true,
    "kind": "json",
-   "ms": 206,
-   "at": 1795616439,
+   "ms": 107,
+   "at": 1795651428,
    "consecutiveFailures": 0,
    "bytes": 652
   },
   "lastCrawl": {
-   "at": 1795616439,
+   "at": 1795651428,
    "ok": true,
    "count": 608,
    "fresh": 608,
@@ -243,16 +243,16 @@
    "status": 200,
    "cors": true,
    "kind": "json",
-   "ms": 369,
-   "at": 1795616439,
+   "ms": 448,
+   "at": 1795651428,
    "consecutiveFailures": 0,
    "bytes": 5639
   },
   "lastCrawl": {
-   "at": 1795616439,
+   "at": 1795651428,
    "ok": true,
-   "count": 1096,
-   "fresh": 515,
+   "count": 1099,
+   "fresh": 502,
    "error": null,
    "errors": 61
   }
@@ -287,13 +287,13 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 402,
-   "at": 1795616439,
+   "ms": 167,
+   "at": 1795651428,
    "consecutiveFailures": 0,
-   "bytes": 97609
+   "bytes": 97225
   },
   "lastCrawl": {
-   "at": 1795616439,
+   "at": 1795651428,
    "ok": true,
    "count": 4319,
    "fresh": 4169,
@@ -325,16 +325,16 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 942,
-   "at": 1795616439,
+   "ms": 558,
+   "at": 1795651428,
    "consecutiveFailures": 0,
    "bytes": 1133
   },
   "lastCrawl": {
-   "at": 1795616439,
+   "at": 1795651428,
    "ok": true,
-   "count": 888,
-   "fresh": 885,
+   "count": 890,
+   "fresh": 887,
    "error": null,
    "errors": 0
   }
@@ -346,17 +346,27 @@
    "character"
   ],
   "status": "blocked",
+  "adapter": "jannyai.json",
   "hosts": [
+   "search.jannyai.com",
+   "image.jannyai.com",
    "jannyai.com"
   ],
-  "probe": "https://jannyai.com/",
-  "evidence": "2026-10-15: a Cloudflare challenge on every page, robots.txt included (never bypassed)",
+  "probe": null,
+  "evidence": "2026-11-25: jannyai.com answers a plain request, robots.txt and terms page included, with a Cloudflare challenge (cf-mitigated: challenge), which is never bypassed. The adapter is built and tested on synthetic answers (search.jannyai.com POST, plain transport, browse and link back only) and held: it is switched on only after a live check from a real visitor's page answers with no bot check, with the date recorded.",
+  "crawl": false,
+  "terms": {
+   "url": "https://jannyai.com/terms",
+   "read": "2026-11-25",
+   "verdict": "silent",
+   "note": "Not read: every page of jannyai.com, its terms and robots.txt included, answers a plain request with a Cloudflare challenge, so no clause could be quoted and none was found forbidding third-party search. The search host search.jannyai.com/robots.txt carries only content-signal comments and no rules. Live search only, never crawled or copied into the index, one request per page of 24, no import. Re-read the terms from a real visitor's page before switching it on."
+  },
   "sweep": {
    "status": 0,
    "cors": false,
-   "kind": "error",
+   "kind": "skipped",
    "ms": 34,
-   "at": 1795616439,
+   "at": 1795651428,
    "consecutiveFailures": 106,
    "error": "robots"
   }
@@ -377,9 +387,9 @@
    "status": 403,
    "cors": false,
    "kind": "challenge",
-   "ms": 253,
-   "at": 1795616439,
-   "consecutiveFailures": 106,
+   "ms": 368,
+   "at": 1795651428,
+   "consecutiveFailures": 107,
    "error": "http"
   }
  },
@@ -399,8 +409,8 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 287,
-   "at": 1795616439,
+   "ms": 353,
+   "at": 1795651428,
    "consecutiveFailures": 0,
    "bytes": 1989
   }
@@ -430,16 +440,16 @@
    "status": 403,
    "cors": false,
    "kind": "challenge",
-   "ms": 267,
-   "at": 1795616439,
-   "consecutiveFailures": 76,
+   "ms": 224,
+   "at": 1795651428,
+   "consecutiveFailures": 77,
    "error": "http"
   },
   "lastCrawl": {
-   "at": 1795616439,
+   "at": 1795651428,
    "ok": true,
-   "count": 8676,
-   "fresh": 8586,
+   "count": 8677,
+   "fresh": 8587,
    "error": null,
    "errors": 0
   }
@@ -453,16 +463,24 @@
   "status": "blocked",
   "hosts": [
    "app.wyvern.chat",
-   "wyvern.chat"
+   "wyvern.chat",
+   "api.wyvern.chat"
   ],
-  "probe": "https://app.wyvern.chat/",
-  "evidence": "api.wyvern.chat answers 401 (2026-09-02)",
+  "probe": null,
+  "evidence": "2026-11-25: not built. Its terms forbid automated access to its search and API, so no adapter exists and none is probed. Offered only if Wyvern grants written permission.",
+  "crawl": false,
+  "terms": {
+   "url": "https://app.wyvern.chat/policy",
+   "read": "2026-11-25",
+   "verdict": "forbids",
+   "note": "Section 3A of its policy: \"Automated Access is prohibited\" except with prior written permission, and it bars using any \"automated tool to access, query, copy, or monitor\" the service; the only exceptions are search-engine indexing and accessibility tools. Never queried, crawled or probed."
+  },
   "sweep": {
    "status": 200,
    "cors": false,
-   "kind": "html",
+   "kind": "skipped",
    "ms": 494,
-   "at": 1795616439,
+   "at": 1795651428,
    "consecutiveFailures": 0,
    "bytes": 2105611
   }
@@ -483,8 +501,8 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 1146,
-   "at": 1795616439,
+   "ms": 757,
+   "at": 1795651428,
    "consecutiveFailures": 0,
    "bytes": 28332
   }
@@ -505,8 +523,8 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 1126,
-   "at": 1795616439,
+   "ms": 851,
+   "at": 1795651428,
    "consecutiveFailures": 0,
    "bytes": 3365
   }
@@ -527,9 +545,9 @@
    "status": 403,
    "cors": false,
    "kind": "challenge",
-   "ms": 780,
-   "at": 1795616439,
-   "consecutiveFailures": 76,
+   "ms": 312,
+   "at": 1795651428,
+   "consecutiveFailures": 77,
    "error": "http"
   }
  },
@@ -557,16 +575,16 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 489,
-   "at": 1795616439,
+   "ms": 624,
+   "at": 1795651428,
    "consecutiveFailures": 0,
    "bytes": 356377
   },
   "lastCrawl": {
-   "at": 1795616439,
+   "at": 1795651428,
    "ok": true,
-   "count": 6081,
-   "fresh": 6053,
+   "count": 6085,
+   "fresh": 6056,
    "error": null,
    "errors": 0
   }
@@ -587,8 +605,8 @@
    "status": 200,
    "cors": true,
    "kind": "html",
-   "ms": 216,
-   "at": 1795616439,
+   "ms": 217,
+   "at": 1795651428,
    "consecutiveFailures": 0,
    "bytes": 3232
   }
@@ -609,8 +627,8 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 231,
-   "at": 1795616439,
+   "ms": 298,
+   "at": 1795651428,
    "consecutiveFailures": 0,
    "bytes": 24444
   }
@@ -631,8 +649,8 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 450,
-   "at": 1795616439,
+   "ms": 409,
+   "at": 1795651428,
    "consecutiveFailures": 0,
    "bytes": 2817
   }
@@ -653,8 +671,8 @@
    "status": 200,
    "cors": true,
    "kind": "html",
-   "ms": 324,
-   "at": 1795616439,
+   "ms": 298,
+   "at": 1795651428,
    "consecutiveFailures": 0,
    "bytes": 10941
   }
@@ -676,9 +694,9 @@
    "status": 403,
    "cors": false,
    "kind": "challenge",
-   "ms": 211,
-   "at": 1795616439,
-   "consecutiveFailures": 106,
+   "ms": 251,
+   "at": 1795651428,
+   "consecutiveFailures": 107,
    "error": "http"
   }
  },
@@ -698,8 +716,8 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 1160,
-   "at": 1795616439,
+   "ms": 1558,
+   "at": 1795651428,
    "consecutiveFailures": 0,
    "bytes": 68935
   }
@@ -720,8 +738,8 @@
    "status": 200,
    "cors": true,
    "kind": "html",
-   "ms": 199,
-   "at": 1795616439,
+   "ms": 137,
+   "at": 1795651428,
    "consecutiveFailures": 0,
    "bytes": 12169
   }
@@ -743,8 +761,8 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 211,
-   "at": 1795616439,
+   "ms": 233,
+   "at": 1795651428,
    "consecutiveFailures": 0,
    "bytes": 24299
   }
@@ -765,8 +783,8 @@
    "status": 200,
    "cors": true,
    "kind": "html",
-   "ms": 371,
-   "at": 1795616439,
+   "ms": 291,
+   "at": 1795651428,
    "consecutiveFailures": 0,
    "bytes": 100166
   }
@@ -787,8 +805,8 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 442,
-   "at": 1795616439,
+   "ms": 374,
+   "at": 1795651428,
    "consecutiveFailures": 0,
    "bytes": 20207
   }
@@ -809,8 +827,8 @@
    "status": 200,
    "cors": true,
    "kind": "html",
-   "ms": 332,
-   "at": 1795616439,
+   "ms": 348,
+   "at": 1795651428,
    "consecutiveFailures": 0,
    "bytes": 149650
   }
@@ -831,10 +849,10 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 1641,
-   "at": 1795616439,
+   "ms": 1115,
+   "at": 1795651428,
    "consecutiveFailures": 0,
-   "bytes": 337550
+   "bytes": 337359
   }
  },
  {
@@ -853,8 +871,8 @@
    "status": 200,
    "cors": true,
    "kind": "html",
-   "ms": 560,
-   "at": 1795616439,
+   "ms": 866,
+   "at": 1795651428,
    "consecutiveFailures": 0,
    "bytes": 1859354
   }
@@ -875,8 +893,8 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 132,
-   "at": 1795616439,
+   "ms": 861,
+   "at": 1795651428,
    "consecutiveFailures": 0,
    "bytes": 159188
   }
@@ -905,13 +923,13 @@
    "status": 200,
    "cors": true,
    "kind": "html",
-   "ms": 327,
-   "at": 1795616439,
+   "ms": 100,
+   "at": 1795651428,
    "consecutiveFailures": 0,
    "bytes": 16955
   },
   "lastCrawl": {
-   "at": 1795616439,
+   "at": 1795651428,
    "ok": true,
    "count": 133,
    "fresh": 133,
@@ -936,9 +954,9 @@
    "status": 0,
    "cors": false,
    "kind": "error",
-   "ms": 136,
-   "at": 1795616439,
-   "consecutiveFailures": 106,
+   "ms": 46,
+   "at": 1795651428,
+   "consecutiveFailures": 107,
    "error": "robots"
   }
  },
@@ -961,9 +979,9 @@
    "status": 403,
    "cors": false,
    "kind": "challenge",
-   "ms": 76,
-   "at": 1795616439,
-   "consecutiveFailures": 106,
+   "ms": 148,
+   "at": 1795651428,
+   "consecutiveFailures": 107,
    "error": "http"
   }
  },
@@ -984,8 +1002,8 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 295,
-   "at": 1795616439,
+   "ms": 260,
+   "at": 1795651428,
    "consecutiveFailures": 0,
    "bytes": 91194
   }
@@ -1003,7 +1021,7 @@
   "note": "partnership ask",
   "sweep": {
    "kind": "skipped",
-   "at": 1795616439
+   "at": 1795651428
   }
  },
  {
@@ -1023,9 +1041,9 @@
    "status": 404,
    "cors": false,
    "kind": "error",
-   "ms": 358,
-   "at": 1795616439,
-   "consecutiveFailures": 106,
+   "ms": 249,
+   "at": 1795651428,
+   "consecutiveFailures": 107,
    "error": "http"
   }
  },
@@ -1045,8 +1063,8 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 1110,
-   "at": 1795616439,
+   "ms": 384,
+   "at": 1795651428,
    "consecutiveFailures": 0,
    "bytes": 50701
   }
@@ -1069,8 +1087,8 @@
    "status": 200,
    "cors": false,
    "kind": "html",
-   "ms": 238,
-   "at": 1795616439,
+   "ms": 395,
+   "at": 1795651428,
    "consecutiveFailures": 0,
    "bytes": 10482
   }
@@ -1089,7 +1107,179 @@
   "evidence": "2026-10-15: the host does not resolve",
   "sweep": {
    "kind": "skipped",
-   "at": 1795616439
+   "at": 1795651428
+  }
+ },
+ {
+  "id": "blizzard-worlds",
+  "label": "BlizzardUI worlds",
+  "kinds": [
+   "scenario"
+  ],
+  "status": "live",
+  "adapter": "blizzard-worlds.mjs",
+  "hosts": [],
+  "probe": null,
+  "evidence": "the owner's own world files, kept in this repo (crawler/first-party/blizzard-worlds/)",
+  "terms": {
+   "url": null,
+   "read": "2026-11-24",
+   "verdict": "none",
+   "note": "first-party: the owner's own worlds, nothing is fetched from anyone"
+  },
+  "sweep": {
+   "kind": "skipped",
+   "at": 1795651428
+  },
+  "lastCrawl": {
+   "at": 1795651428,
+   "ok": true,
+   "count": 0,
+   "fresh": 0,
+   "error": null,
+   "errors": 0
+  }
+ },
+ {
+  "id": "last-horizon-worlds",
+  "label": "Last Horizon worlds",
+  "kinds": [
+   "scenario"
+  ],
+  "status": "live",
+  "adapter": "last-horizon-worlds.mjs",
+  "hosts": [],
+  "probe": null,
+  "evidence": "the owner's own worlds, published by the game as plain files in its assets repo (last-horizon/manifest-2.json); each fetched at its own commit and checked against the manifest's bytes and sha256",
+  "terms": {
+   "url": null,
+   "read": "2026-11-25",
+   "verdict": "none",
+   "note": "first-party: the owner's own worlds"
+  },
+  "sweep": {
+   "kind": "skipped",
+   "at": 1795651428
+  },
+  "lastCrawl": {
+   "at": 1795651428,
+   "ok": false,
+   "count": 0,
+   "fresh": 0,
+   "error": "manifest unreadable: robots.txt disallows https://cdn.jsdelivr.net/gh/PEEPEEBOY69/nohbdy-assets@main/last-horizon/manifest-2.json; HTTP 404 https://raw.githubusercontent.com/PEEPEEBOY69/nohbdy-assets/main/last-horizon/manifest-2.json",
+   "errors": 1
+  }
+ },
+ {
+  "id": "mno",
+  "label": "MNO RPG Engine",
+  "kinds": [
+   "scenario"
+  ],
+  "status": "live",
+  "adapter": "mno.mjs",
+  "hosts": [
+   "perchance.org"
+  ],
+  "probe": null,
+  "evidence": "2026-11-25: 1,626 user-published worlds in the engine's community catalog, exported from a browser into crawler/snapshots/mno/ (its server answers only its own page); pointer records, the world blobs stay at user.uploads.dev",
+  "terms": {
+   "url": null,
+   "read": "2026-11-25",
+   "verdict": "none",
+   "note": "metadata only (title, blurb, tags, cover URL, author name, links) from a public community catalog; no terms page was read for it; each record credits its author and links back to the catalog"
+  },
+  "sweep": {
+   "kind": "skipped",
+   "at": 1795651428
+  },
+  "lastCrawl": {
+   "at": 1795651428,
+   "ok": true,
+   "count": 1626,
+   "fresh": 1626,
+   "error": null,
+   "errors": 0
+  }
+ },
+ {
+  "id": "charavault-cards",
+  "label": "CharaVault",
+  "kinds": [
+   "character"
+  ],
+  "status": "blocked",
+  "adapter": "charavault-cards.json",
+  "hosts": [
+   "charavault.net"
+  ],
+  "probe": null,
+  "evidence": "2026-11-25: its API answers scripted requests with a Cloudflare challenge (\"Automated access not permitted\") and sends no CORS header, so neither a visitor's browser nor the Perchance proxy can read it without getting past a bot check, which is never done. Built and kept ready; offered again if CharaVault allows perchance.org.",
+  "crawl": false,
+  "terms": {
+   "url": "https://charavault.net/",
+   "read": "2026-11-25",
+   "verdict": "allows",
+   "note": "Reasonable scraping and API usage is permitted (its terms); its robots.txt disallows /api/ for crawlers, so it is never crawled or copied into the index: live search only, at a visitor's request, one request per page of 24"
+  },
+  "sweep": {
+   "kind": "skipped",
+   "at": 1795651428
+  }
+ },
+ {
+  "id": "charavault-lorebooks",
+  "label": "CharaVault Lorebooks",
+  "kinds": [
+   "lorebook"
+  ],
+  "status": "blocked",
+  "adapter": "charavault-lorebooks.json",
+  "hosts": [
+   "charavault.net"
+  ],
+  "probe": null,
+  "evidence": "2026-11-25: its API answers scripted requests with a Cloudflare challenge (\"Automated access not permitted\") and sends no CORS header, so neither a visitor's browser nor the Perchance proxy can read it without getting past a bot check, which is never done. Built and kept ready; offered again if CharaVault allows perchance.org.",
+  "crawl": false,
+  "terms": {
+   "url": "https://charavault.net/",
+   "read": "2026-11-25",
+   "verdict": "allows",
+   "note": "as charavault-cards"
+  },
+  "sweep": {
+   "kind": "skipped",
+   "at": 1795651428
+  }
+ },
+ {
+  "id": "nosfertm",
+  "label": "Perchance Character Database",
+  "kinds": [
+   "character"
+  ],
+  "status": "blocked",
+  "adapter": "nosfertm.json",
+  "hosts": [
+   "lpnsvjanyqhbknpedraq.supabase.co",
+   "nosfertm.github.io",
+   "raw.githubusercontent.com",
+   "cdn.jsdelivr.net",
+   "fastly.jsdelivr.net",
+   "gcore.jsdelivr.net"
+  ],
+  "probe": null,
+  "evidence": "2026-11-25: its database answered HTTP 402 (the project's hosting quota is used up). Built and kept ready; offered again once a live check answers.",
+  "crawl": false,
+  "terms": {
+   "url": "https://github.com/nosfertm/perchance-character-database",
+   "read": "2026-11-25",
+   "verdict": "allows",
+   "note": "code MIT; characters CC BY-SA 4.0, so the creator is always credited and every result links back to the character's page; live search only"
+  },
+  "sweep": {
+   "kind": "skipped",
+   "at": 1795651428
   }
  }
 ]
